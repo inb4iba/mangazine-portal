@@ -13,7 +13,7 @@ export const PostCard = ({ addSeparator, post }: PostCardProps) => {
     <article key={post._id} className="flex flex-col gap-5">
       {addSeparator && <div className="w-8/12 h-[1px] bg-zinc-200"></div>}
       <div className="flex gap-5">
-        <div className="relative w-1/4 aspect-video">
+        <div className="relative w-1/4 aspect-video flex items-center">
           <Image
             src={urlFor(post.cover).url()}
             alt="cover image"
@@ -21,7 +21,7 @@ export const PostCard = ({ addSeparator, post }: PostCardProps) => {
             className="object-cover"
           />
         </div>
-        <div className="flex flex-1 flex-col justify-between">
+        <div className="flex flex-1 flex-col justify-between gap-2">
           <div className="flex flex-col gap-2">
             <h3 className="font-bold text-3xl">{post.title}</h3>
             <p className="w-4/5 text-zinc-600">{post.description}</p>
