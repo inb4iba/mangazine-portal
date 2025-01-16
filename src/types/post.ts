@@ -5,6 +5,7 @@ export type PostSummary = {
   _id: string;
   description: string;
   title: string;
+  slug: string;
   created_at: string;
   cover: SanityImageSource;
   author: Author;

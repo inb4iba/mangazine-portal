@@ -6,9 +6,10 @@ export const POSTS_QUERY = defineQuery(`*[_type == "post"]{
     description,
     cover,
     created_at,
+    "slug": slug.current,
     author -> {
         _id,
         name,
         avatar
     }
-}`)
+}`);
