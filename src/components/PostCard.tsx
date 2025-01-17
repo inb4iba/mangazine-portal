@@ -3,6 +3,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { PostSummary } from "@/types/post";
 import { AuthorNameplate } from "./AuthorNameplate";
 import Link from "next/link";
+import { formatDate } from "@/utils/formatDate";
 
 export type PostCardProps = {
   addSeparator: boolean;
@@ -33,7 +34,7 @@ export const PostCard = ({ addSeparator, post }: PostCardProps) => {
           </div>
           <div className="flex justify-between items-center w-11/12">
             <AuthorNameplate author={post.author} />
-            <span className="text-zinc-600">{post.created_at}</span>
+            <span className="text-zinc-600">{formatDate(post.created_at)}</span>
           </div>
         </div>
       </div>
