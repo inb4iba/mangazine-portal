@@ -22,7 +22,7 @@ export default async function Home() {
             <PostCard addSeparator={idx !== 0} key={post._id} post={post} />
           ))}
         </section>
-        <section className="w-64 bg-zinc-300"></section>
+        <section className="w-96 bg-zinc-300"></section>
       </div>
     </main>
   );
