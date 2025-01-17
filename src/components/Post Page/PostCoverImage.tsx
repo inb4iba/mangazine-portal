@@ -32,7 +32,7 @@ export const PostCoverImage = ({ coverUrl, title }: Props) => {
         }}
       />
 
-      <div className="bg-gradient-to-b from-transparent to-zinc-900 absolute w-full h-full z-50 flex flex-col justify-end px-8 py-4 gap-2">
+      <div className="bg-gradient-to-b from-transparent via-30% via-transparent to-80% to-zinc-900 opacity-90 absolute w-full h-full z-50 flex flex-col justify-end px-8 py-4 gap-2">
         <h1 className="text-5xl text-zinc-100 font-bold w-10/12">{title}</h1>
         <p className="text-zinc-100 text-xl w-3/4">
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit assumenda

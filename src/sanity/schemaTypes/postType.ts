@@ -51,7 +51,7 @@ export const postType = defineType({
       options: {
         dateFormat: "DD/MM/YYYY",
       },
-      validation: (Rule) => Rule.required().min(yesterday().toISOString()),
+      validation: (Rule) => Rule.required(),
     }),
     defineField({
       name: "author",
@@ -84,8 +84,3 @@ export const postType = defineType({
     }),
   ],
 });
-
-const yesterday = (): Date => {
-  const today = new Date();
-  return new Date(today.setDate(today.getDate() - 1));
-};
