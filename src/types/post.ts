@@ -10,3 +10,13 @@ export type PostSummary = {
   cover: SanityImageSource;
   author: Author;
 };
+
+export type PostPage = {
+  _id: string;
+  title: string;
+  created_at: string;
+  cover: SanityImageSource;
+  author: Author;
+  podcast: string;
+  body: any;
+};
