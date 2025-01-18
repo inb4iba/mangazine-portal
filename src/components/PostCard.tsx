@@ -6,6 +6,7 @@ import { formatDate } from "@/utils/formatDate";
 import { POSTS_QUERYResult } from "@/sanity/types";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { roboto } from "@/app/(blog)/layout";
+import { Separator } from "./Separator";
 
 export type PostCardProps = {
   addSeparator: boolean;
@@ -15,7 +16,7 @@ export type PostCardProps = {
 export const PostCard = ({ addSeparator, post }: PostCardProps) => {
   return (
     <article key={post._id} className="flex flex-col gap-5">
-      {addSeparator && <div className="w-8/12 h-[1px] bg-zinc-200"></div>}
+      {addSeparator && <Separator />}
       <div className="flex flex-grow gap-5">
         <Link
           href={`/posts/${post.slug}`}
