@@ -6,8 +6,8 @@ type Props = {
 
 export const PostSummary = ({ chapters }: Props) => {
   return (
-    <div className="flex w-10/12 py-4 px-6">
-      <ul className="flex flex-col gap-2 font-semibold text-lg">
+    <div className="hidden w-10/12 px-6 py-4 sm:flex">
+      <ul className="flex flex-col gap-2 text-lg font-semibold">
         {chapters.map((chapter) => {
           const slug = generateSlug(chapter);
 

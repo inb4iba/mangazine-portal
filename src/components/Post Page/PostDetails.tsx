@@ -11,21 +11,21 @@ type Props = {
   created_at: string;
 };
 
-export const PostDetailsSidebar = ({ author, body, created_at }: Props) => {
+export const PostDetails = ({ author, body, created_at }: Props) => {
   return (
-    <aside className="flex flex-col w-96 sticky top-0 h-fit">
+    <aside className="relative top-0 flex justify-between w-full sm:flex-col sm:sticky sm:w-96 h-fit">
       <PostSummary chapters={filterChaptersFromBody(body)} />
-      <Separator />
-      <div className="flex flex-col w-full py-4 px-6 gap-2">
-        <span className="font-medium">Escrito por</span>
+      <Separator className="hidden sm:block" />
+      <div className="flex flex-col flex-grow gap-2 px-6 py-4 sm:w-full">
+        <span className="hidden font-medium sm:inline-block">Escrito por</span>
         <AuthorNameplate author={author} />
       </div>
-      <Separator />
-      <div className="flex flex-col w-full py-4 px-6 gap-2">
-        <p className="font-medium">
+      <Separator className="hidden sm:block" />
+      <div className="flex gap-2 px-6 py-4 sm:flex-col sm:w-full">
+        <span className="hidden font-medium sm:inline-block">
           Data de publicação:{" "}
-          <span className="text-violet-600">{formatDate(created_at)}</span>
-        </p>
+        </span>
+        <span className="text-violet-600">{formatDate(created_at)}</span>
       </div>
     </aside>
   );

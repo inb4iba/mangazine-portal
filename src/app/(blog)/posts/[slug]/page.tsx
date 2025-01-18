@@ -1,6 +1,6 @@
 import { PodcastPlayer } from "@/components/Post Page/PodcastPlayer";
 import { PostCoverImage } from "@/components/Post Page/PostCoverImage";
-import { PostDetailsSidebar } from "@/components/Post Page/PostDetailsSidebar";
+import { PostDetails } from "@/components/Post Page/PostDetails";
 import { BlockTextComponents } from "@/components/Text/BlogTextComponents";
 import { urlFor } from "@/sanity/lib/image";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -31,14 +31,14 @@ const Post = async ({ params }: PostProps) => {
   if (!post) throw new Error("Problema carregando o post.");
 
   return (
-    <main className="flex flex-1 justify-center">
-      <div className="flex flex-col xl:w-[1248px] mt-2 mb-8 gap-8">
+    <main className="flex justify-center flex-1">
+      <div className="flex flex-col xl:w-[1248px] pb-2 gap-2">
         <PostCoverImage
           coverUrl={urlFor(post.cover as SanityImageSource).url()}
           title={post.title || ""}
         />
-        <div className="flex flex-grow gap-20 relative">
-          <section className="flex flex-col flex-grow px-6 py-4 gap-5">
+        <div className="relative flex flex-col-reverse flex-grow sm:flex-row">
+          <section className="flex flex-col flex-grow gap-5 p-4 sm:px-8 lg:px-6">
             {post.podcast && <PodcastPlayer url={post.podcast} />}
             <article className="prose prose-lg">
               {post.body && (
@@ -49,7 +49,7 @@ const Post = async ({ params }: PostProps) => {
               )}
             </article>
           </section>
-          <PostDetailsSidebar
+          <PostDetails
             author={post.author}
             body={post.body}
             created_at={post.created_at || ""}
