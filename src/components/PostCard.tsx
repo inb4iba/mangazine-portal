@@ -17,10 +17,10 @@ export const PostCard = ({ addSeparator, post }: PostCardProps) => {
   return (
     <article key={post._id} className="flex flex-col gap-5">
       {addSeparator && <Separator />}
-      <div className="flex flex-grow gap-5">
+      <div className="flex flex-col sm:flex-row flex-grow gap-3">
         <Link
           href={`/posts/${post.slug}`}
-          className="relative w-2/6 aspect-video flex items-center">
+          className="relative aspect-video sm:aspect-square lg:aspect-video flex sm:w-1/3 lg:w-2/5 items-center">
           <Image
             src={urlFor(post.cover as SanityImageSource).url()}
             alt="cover image"
@@ -31,13 +31,13 @@ export const PostCard = ({ addSeparator, post }: PostCardProps) => {
         <div className="flex flex-1 flex-col justify-between gap-2">
           <div className="flex flex-col gap-2">
             <Link href={`/posts/${post.slug}`}>
-              <h3 className="font-bold text-2xl">{post.title}</h3>
+              <h3 className="font-semibold text-2xl">{post.title}</h3>
             </Link>
             <p className={`${roboto.className} text-zinc-600`}>
               {post.description}
             </p>
           </div>
-          <div className="flex justify-between items-center w-11/12 text-sm">
+          <div className="flex justify-between items-center text-sm">
             <AuthorNameplate author={post.author} />
             <span className="text-zinc-600">{formatDate(post.created_at)}</span>
           </div>

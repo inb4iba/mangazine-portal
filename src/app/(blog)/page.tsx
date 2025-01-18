@@ -16,13 +16,13 @@ export default async function Home() {
 
   return (
     <main className="flex flex-1 justify-center">
-      <div className="flex xl:w-[1248px] my-8 gap-5">
+      <div className="flex flex-col lg:flex-row xl:w-[1248px] gap-5 px-4 pb-4 sm:px-8 lg:pb-8">
         <section className="flex-grow flex flex-col gap-5">
           {data.map((post, idx) => (
             <PostCard addSeparator={idx !== 0} key={post._id} post={post} />
           ))}
         </section>
-        <section className="w-96 bg-zinc-300"></section>
+        <section className="bg-zinc-300 h-80 lg:h-full lg:w-96"></section>
       </div>
     </main>
   );
