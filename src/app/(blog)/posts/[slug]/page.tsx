@@ -1,3 +1,4 @@
+import { PodcastPlayer } from "@/components/Post Page/PodcastPlayer";
 import { PostCoverImage } from "@/components/Post Page/PostCoverImage";
 import { PostDetailsSidebar } from "@/components/Post Page/PostDetailsSidebar";
 import { BlockTextComponents } from "@/components/Text/BlogTextComponents";
@@ -37,7 +38,8 @@ const Post = async ({ params }: PostProps) => {
           title={post.title || ""}
         />
         <div className="flex flex-grow gap-20 relative">
-          <section className="flex-grow px-6 py-4">
+          <section className="flex flex-col flex-grow px-6 py-4 gap-5">
+            {post.podcast && <PodcastPlayer url={post.podcast} />}
             <article className="prose prose-lg">
               {post.body && (
                 <PortableText
