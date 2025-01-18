@@ -14,9 +14,9 @@ export type PostCardProps = {
 
 export const PostCard = ({ addSeparator, post }: PostCardProps) => {
   return (
-    <article key={post._id} className="flex flex-col gap-5 min-h-52">
+    <article key={post._id} className="flex flex-col gap-5">
       {addSeparator && <div className="w-8/12 h-[1px] bg-zinc-200"></div>}
-      <div className="flex flex-1 gap-5">
+      <div className="flex flex-grow gap-5">
         <Link
           href={`/posts/${post.slug}`}
           className="relative w-2/6 aspect-video flex items-center">
@@ -32,7 +32,7 @@ export const PostCard = ({ addSeparator, post }: PostCardProps) => {
             <Link href={`/posts/${post.slug}`}>
               <h3 className="font-bold text-2xl">{post.title}</h3>
             </Link>
-            <p className={`${roboto.className} w-4/5 text-zinc-600`}>
+            <p className={`${roboto.className} text-zinc-600`}>
               {post.description}
             </p>
           </div>

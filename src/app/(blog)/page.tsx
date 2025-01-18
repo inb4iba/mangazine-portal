@@ -16,7 +16,7 @@ export default async function Home() {
 
   return (
     <main className="flex flex-1 justify-center">
-      <div className="flex xl:w-[1248px] my-8">
+      <div className="flex xl:w-[1248px] my-8 gap-5">
         <section className="flex-grow flex flex-col gap-5">
           {data.map((post, idx) => (
             <PostCard addSeparator={idx !== 0} key={post._id} post={post} />
