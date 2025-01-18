@@ -1,7 +1,7 @@
 import { PostCard } from "@/components/PostCard";
 import { sanityFetch } from "@/sanity/lib/live";
 import { POSTS_QUERY } from "@/sanity/queries/posts";
-import { PostSummary } from "@/types/post";
+import { POSTS_QUERYResult } from "@/sanity/types";
 
 async function getData() {
   const { data } = await sanityFetch({
@@ -12,7 +12,7 @@ async function getData() {
 }
 
 export default async function Home() {
-  const data: PostSummary[] = await getData();
+  const data: POSTS_QUERYResult = await getData();
 
   return (
     <main className="flex flex-1 justify-center">

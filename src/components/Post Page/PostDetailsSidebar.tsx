@@ -1,12 +1,12 @@
 import { filterChaptersFromBody } from "@/utils/filterChapters";
 import { PostSummary } from "./PostSummary";
-import { Author } from "@/types/author";
 import { AuthorNameplate } from "../AuthorNameplate";
 import { formatDate } from "@/utils/formatDate";
+import { SINGLE_POST_QUERYResult } from "@/sanity/types";
 
 type Props = {
-  body: any;
-  author: Author;
+  body: NonNullable<SINGLE_POST_QUERYResult>["body"];
+  author: NonNullable<SINGLE_POST_QUERYResult>["author"];
   created_at: string;
 };
 

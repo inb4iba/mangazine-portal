@@ -1,16 +1,19 @@
 import { urlFor } from "@/sanity/lib/image";
-import { Author } from "@/types/author";
+import { POSTS_QUERYResult } from "@/sanity/types";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
 
 type AuthorNameplateProps = {
-  author: Author;
+  author: POSTS_QUERYResult[number]["author"];
 };
 
 export const AuthorNameplate = ({ author }: AuthorNameplateProps) => {
+  if (!author) throw new Error("Post sem autor");
+
   return (
     <div className="flex relative items-center gap-2">
       <Image
-        src={urlFor(author.avatar).url()}
+        src={urlFor(author.avatar as SanityImageSource).url()}
         alt={`${author.name} avatar`}
         width={24}
         height={24}

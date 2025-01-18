@@ -1,13 +1,14 @@
 import Image from "next/image";
 import { urlFor } from "@/sanity/lib/image";
-import { PostSummary } from "@/types/post";
 import { AuthorNameplate } from "./AuthorNameplate";
 import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
+import { POSTS_QUERYResult } from "@/sanity/types";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
 export type PostCardProps = {
   addSeparator: boolean;
-  post: PostSummary;
+  post: POSTS_QUERYResult[number];
 };
 
 export const PostCard = ({ addSeparator, post }: PostCardProps) => {
@@ -19,7 +20,7 @@ export const PostCard = ({ addSeparator, post }: PostCardProps) => {
           href={`/posts/${post.slug}`}
           className="relative w-1/4 aspect-video flex items-center">
           <Image
-            src={urlFor(post.cover).url()}
+            src={urlFor(post.cover as SanityImageSource).url()}
             alt="cover image"
             fill
             className="object-cover"

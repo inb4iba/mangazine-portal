@@ -14,17 +14,17 @@ export const POSTS_QUERY = defineQuery(`*[_type == "post"]{
     }
 }`);
 
-export const SINGLE_POST_QUERY = (slug: string) =>
-  defineQuery(`*[_type == "post" && slug.current == "${slug}"]{
-  _id,
-  cover,
-  title,
-  podcast,
-  created_at,
-  body,
-  author -> {
+export const SINGLE_POST_QUERY =
+  defineQuery(`*[_type == "post" && slug.current == $slug]{
     _id,
-    name,
-    avatar
-  }
-}[0]`);
+    cover,
+    title,
+    podcast,
+    created_at,
+    body,
+    author -> {
+      _id,
+      name,
+      avatar
+    }
+  }[0]`);
