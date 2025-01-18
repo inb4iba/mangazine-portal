@@ -5,8 +5,8 @@ import Link from "next/link";
 import { formatDate } from "@/utils/formatDate";
 import { POSTS_QUERYResult } from "@/sanity/types";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
-import { roboto } from "@/app/(blog)/layout";
 import { Separator } from "./Separator";
+import { roboto } from "@/app/fonts";
 
 export type PostCardProps = {
   addSeparator: boolean;

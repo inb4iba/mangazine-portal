@@ -1,4 +1,4 @@
-import { roboto } from "@/app/(blog)/layout";
+import { roboto } from "@/app/fonts";
 import Link from "next/link";
 
 export const Header = () => {
