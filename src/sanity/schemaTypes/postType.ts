@@ -37,6 +37,14 @@ export const postType = defineType({
       validation: (Rule) => Rule.required().max(256),
     }),
     defineField({
+      name: "tag",
+      title: "Tag",
+      type: "reference",
+      to: [{ type: "tag" }],
+      fieldset: "_presentation",
+      validation: (Rule) => Rule.required(),
+    }),
+    defineField({
       name: "cover",
       title: "Capa",
       type: "image",
@@ -60,6 +68,13 @@ export const postType = defineType({
       to: [{ type: "author" }],
       fieldset: "_presentation",
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "subtitle",
+      title: "Subtítulo",
+      type: "string",
+      fieldset: "_body",
+      validation: (Rule) => Rule.required().max(128),
     }),
     defineField({
       name: "body",

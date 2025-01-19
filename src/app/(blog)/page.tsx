@@ -32,11 +32,10 @@ export default async function Home(props: {
 }) {
   const params = await props.searchParams;
   const page = params?.page;
-  const PER_PAGE = 3;
+  const PER_PAGE = 10;
   const postsCount: COUNT_POSTS_QUERYResult = await getPostsCount();
 
   const totalPages = getTotalPages(postsCount, PER_PAGE);
-  // const totalPages = getTotalPages(30, PER_PAGE);
 
   if (page && (Number(page) > totalPages || Number(page) < 1))
     throw new Error("Página inválida!");

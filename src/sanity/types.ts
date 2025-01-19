@@ -77,6 +77,12 @@ export type Post = {
   title?: string;
   slug?: Slug;
   description?: string;
+  tag?: {
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    [internalGroqTypeReferenceTo]?: "tag";
+  };
   cover?: {
     asset?: {
       _ref: string;
@@ -95,6 +101,7 @@ export type Post = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "author";
   };
+  subtitle?: string;
   body?: Array<{
     children?: Array<{
       marks?: Array<string>;
@@ -127,6 +134,15 @@ export type Post = {
   podcast?: string;
 };
 
+export type Tag = {
+  _id: string;
+  _type: "tag";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  tag?: string;
+};
+
 export type Slug = {
   _type: "slug";
   current?: string;
@@ -151,6 +167,14 @@ export type Author = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  bluesky?: string;
+  twitter?: string;
+  instagram?: string;
+  anilist?: string;
+  myanimelist?: string;
+  youtube?: string;
+  tiktok?: string;
+  spotify?: string;
 };
 
 export type SanityImageCrop = {
@@ -210,44 +234,9 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Post | Slug | Author | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Post | Tag | Slug | Author | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/queries/posts.ts
-// Variable: POSTS_QUERY
-// Query: *[_type == "post"]{    _id,    title,    description,    cover,    created_at,    "slug": slug.current,    author -> {        _id,        name,        avatar    }}
-export type POSTS_QUERYResult = Array<{
-  _id: string;
-  title: string | null;
-  description: string | null;
-  cover: {
-    asset?: {
-      _ref: string;
-      _type: "reference";
-      _weak?: boolean;
-      [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-    };
-    hotspot?: SanityImageHotspot;
-    crop?: SanityImageCrop;
-    _type: "image";
-  } | null;
-  created_at: string | null;
-  slug: string | null;
-  author: {
-    _id: string;
-    name: string | null;
-    avatar: {
-      asset?: {
-        _ref: string;
-        _type: "reference";
-        _weak?: boolean;
-        [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
-      };
-      hotspot?: SanityImageHotspot;
-      crop?: SanityImageCrop;
-      _type: "image";
-    } | null;
-  } | null;
-}>;
 // Variable: SINGLE_POST_QUERY
 // Query: *[_type == "post" && slug.current == $slug]{    _id,    cover,    title,    podcast,    created_at,    body,    author -> {      _id,      name,      avatar    }  }[0]
 export type SINGLE_POST_QUERYResult = {
@@ -319,7 +308,6 @@ export type COUNT_POSTS_QUERYResult = number;
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"post\"]{\n    _id,\n    title,\n    description,\n    cover,\n    created_at,\n    \"slug\": slug.current,\n    author -> {\n        _id,\n        name,\n        avatar\n    }\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug]{\n    _id,\n    cover,\n    title,\n    podcast,\n    created_at,\n    body,\n    author -> {\n      _id,\n      name,\n      avatar\n    }\n  }[0]": SINGLE_POST_QUERYResult;
     "count(*[_type == \"post\" && !(_id in path('drafts.**'))])": COUNT_POSTS_QUERYResult;
   }
