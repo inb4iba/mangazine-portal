@@ -1,6 +1,7 @@
 import { defineQuery } from "next-sanity";
 
-export const POSTS_QUERY = defineQuery(`*[_type == "post"]{
+export const POSTS_QUERY =
+  defineQuery(`*[_type == "post"] | order(created_at desc)[($page - 1) * $perPage..($page * $perPage) - 1]{
     _id,
     title,
     description,
