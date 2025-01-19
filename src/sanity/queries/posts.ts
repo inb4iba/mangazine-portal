@@ -28,3 +28,7 @@ export const SINGLE_POST_QUERY =
       avatar
     }
   }[0]`);
+
+export const COUNT_POSTS_QUERY = defineQuery(
+  `count(*[_type == "post" && !(_id in path('drafts.**'))])`
+);

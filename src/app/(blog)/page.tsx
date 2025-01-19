@@ -1,26 +1,52 @@
+import { PaginationControls } from "@/components/PaginationControls";
 import { PostCard } from "@/components/PostCard";
 import { sanityFetch } from "@/sanity/lib/live";
-import { POSTS_QUERY } from "@/sanity/queries/posts";
-import { POSTS_QUERYResult } from "@/sanity/types";
+import { COUNT_POSTS_QUERY, POSTS_QUERY } from "@/sanity/queries/posts";
+import { COUNT_POSTS_QUERYResult, POSTS_QUERYResult } from "@/sanity/types";
+import { getTotalPages } from "@/utils/pagination";
 
-async function getData() {
+const getPosts = async () => {
   const { data } = await sanityFetch({
     query: POSTS_QUERY,
   });
 
   return data;
-}
+};
 
-export default async function Home() {
-  const data: POSTS_QUERYResult = await getData();
+const getPostsCount = async () => {
+  const { data } = await sanityFetch({
+    query: COUNT_POSTS_QUERY,
+  });
+
+  return data;
+};
+
+export default async function Home(props: {
+  searchParams?: Promise<{
+    page?: string;
+  }>;
+}) {
+  const params = await props.searchParams;
+  const page = params?.page;
+  const PER_PAGE = 2;
+  const postsCount: COUNT_POSTS_QUERYResult = await getPostsCount();
+
+  const totalPages = getTotalPages(postsCount, PER_PAGE);
+  // const totalPages = getTotalPages(30, PER_PAGE);
+
+  if (page && (Number(page) > totalPages || Number(page) < 1))
+    throw new Error("Página inválida!");
+
+  const posts: POSTS_QUERYResult = await getPosts();
 
   return (
-    <main className="flex flex-1 justify-center">
+    <main className="flex justify-center flex-1">
       <div className="flex flex-col lg:flex-row xl:w-[1248px] gap-5 px-4 pb-4 sm:px-8 lg:pb-8">
-        <section className="flex-grow flex flex-col gap-5">
-          {data.map((post, idx) => (
+        <section className="flex flex-col flex-grow gap-5">
+          {posts.map((post, idx) => (
             <PostCard addSeparator={idx !== 0} key={post._id} post={post} />
           ))}
+          <PaginationControls pagesCount={totalPages} />
         </section>
         <section className="bg-zinc-300 h-80 lg:h-full lg:w-96"></section>
       </div>

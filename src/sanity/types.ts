@@ -311,6 +311,9 @@ export type SINGLE_POST_QUERYResult = {
     } | null;
   } | null;
 } | null;
+// Variable: COUNT_POSTS_QUERY
+// Query: count(*[_type == "post" && !(_id in path('drafts.**'))])
+export type COUNT_POSTS_QUERYResult = number;
 
 // Query TypeMap
 import "@sanity/client";
@@ -318,5 +321,6 @@ declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"post\"]{\n    _id,\n    title,\n    description,\n    cover,\n    created_at,\n    \"slug\": slug.current,\n    author -> {\n        _id,\n        name,\n        avatar\n    }\n}": POSTS_QUERYResult;
     "*[_type == \"post\" && slug.current == $slug]{\n    _id,\n    cover,\n    title,\n    podcast,\n    created_at,\n    body,\n    author -> {\n      _id,\n      name,\n      avatar\n    }\n  }[0]": SINGLE_POST_QUERYResult;
+    "count(*[_type == \"post\" && !(_id in path('drafts.**'))])": COUNT_POSTS_QUERYResult;
   }
 }
