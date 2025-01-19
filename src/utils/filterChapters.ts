@@ -9,7 +9,7 @@ export const filterChaptersFromBody = (body: Body): string[] => {
     .filter((block) => block._type === "block" && block.style?.startsWith("h"))
     .map((block) =>
       block._type === "block" && block.children
-        ? block.children.shift()?.text || ""
+        ? block.children.map((child) => child.text).join(" ") || ""
         : ""
     );
 
