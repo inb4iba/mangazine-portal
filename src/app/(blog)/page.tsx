@@ -5,9 +5,13 @@ import { COUNT_POSTS_QUERY, POSTS_QUERY } from "@/sanity/queries/posts";
 import { COUNT_POSTS_QUERYResult, POSTS_QUERYResult } from "@/sanity/types";
 import { getTotalPages } from "@/utils/pagination";
 
-const getPosts = async () => {
+const getPosts = async (perPage: number, page: number = 1) => {
   const { data } = await sanityFetch({
     query: POSTS_QUERY,
+    params: {
+      perPage,
+      page,
+    },
   });
 
   return data;
@@ -28,7 +32,7 @@ export default async function Home(props: {
 }) {
   const params = await props.searchParams;
   const page = params?.page;
-  const PER_PAGE = 2;
+  const PER_PAGE = 3;
   const postsCount: COUNT_POSTS_QUERYResult = await getPostsCount();
 
   const totalPages = getTotalPages(postsCount, PER_PAGE);
@@ -37,7 +41,10 @@ export default async function Home(props: {
   if (page && (Number(page) > totalPages || Number(page) < 1))
     throw new Error("Página inválida!");
 
-  const posts: POSTS_QUERYResult = await getPosts();
+  const posts: POSTS_QUERYResult = await getPosts(
+    PER_PAGE,
+    page ? (Number.isNaN(page) ? undefined : Number(page)) : undefined
+  );
 
   return (
     <main className="flex justify-center flex-1">
