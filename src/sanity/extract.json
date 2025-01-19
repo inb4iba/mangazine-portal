@@ -958,61 +958,85 @@
         },
         "optional": true
       },
-      "bluesky": {
+      "socials": {
         "type": "objectAttribute",
         "value": {
-          "type": "string"
+          "type": "inline",
+          "name": "socials"
         },
         "optional": true
-      },
-      "twitter": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
+      }
+    }
+  },
+  {
+    "name": "socials",
+    "type": "type",
+    "value": {
+      "type": "object",
+      "attributes": {
+        "_type": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string",
+            "value": "socials"
+          }
         },
-        "optional": true
-      },
-      "instagram": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
+        "bluesky": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
         },
-        "optional": true
-      },
-      "anilist": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
+        "twitter": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
         },
-        "optional": true
-      },
-      "myanimelist": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
+        "instagram": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
         },
-        "optional": true
-      },
-      "youtube": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
+        "anilist": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
         },
-        "optional": true
-      },
-      "tiktok": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
+        "myanimelist": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
         },
-        "optional": true
-      },
-      "spotify": {
-        "type": "objectAttribute",
-        "value": {
-          "type": "string"
+        "youtube": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
         },
-        "optional": true
+        "tiktok": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        },
+        "spotify": {
+          "type": "objectAttribute",
+          "value": {
+            "type": "string"
+          },
+          "optional": true
+        }
       }
     }
   },

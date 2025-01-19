@@ -167,6 +167,11 @@ export type Author = {
     crop?: SanityImageCrop;
     _type: "image";
   };
+  socials?: Socials;
+};
+
+export type Socials = {
+  _type: "socials";
   bluesky?: string;
   twitter?: string;
   instagram?: string;
@@ -234,11 +239,11 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Post | Tag | Slug | Author | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Post | Tag | Slug | Author | Socials | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/queries/posts.ts
 // Variable: POSTS_QUERY
-// Query: *[_type == "post"] | order(created_at desc)[0..$perPage]{    _id,    title,    description,    cover,    created_at,    "slug": slug.current,    author -> {        _id,        name,        avatar    }}
+// Query: *[_type == "post"] | order(created_at desc)[0..$perPage]{    _id,    title,    description,    cover,    created_at,    "slug": slug.current,    "tag": tag->tag,    author -> {        _id,        name,        avatar    }}
 export type POSTS_QUERYResult = Array<{
   _id: string;
   title: string | null;
@@ -256,6 +261,7 @@ export type POSTS_QUERYResult = Array<{
   } | null;
   created_at: string | null;
   slug: string | null;
+  tag: string | null;
   author: {
     _id: string;
     name: string | null;
@@ -273,7 +279,7 @@ export type POSTS_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: SINGLE_POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug]{    _id,    cover,    title,    podcast,    created_at,    body,    author -> {      _id,      name,      avatar    }  }[0]
+// Query: *[_type == "post" && slug.current == $slug]{    _id,    cover,    title,    podcast,    created_at,    body,    subtitle,    "tag": tag->tag,    author -> {      _id,      name,      avatar,      socials    }  }[0]
 export type SINGLE_POST_QUERYResult = {
   _id: string;
   cover: {
@@ -319,6 +325,8 @@ export type SINGLE_POST_QUERYResult = {
     _type: "image";
     _key: string;
   }> | null;
+  subtitle: string | null;
+  tag: string | null;
   author: {
     _id: string;
     name: string | null;
@@ -333,6 +341,7 @@ export type SINGLE_POST_QUERYResult = {
       crop?: SanityImageCrop;
       _type: "image";
     } | null;
+    socials: Socials | null;
   } | null;
 } | null;
 // Variable: COUNT_POSTS_QUERY
@@ -343,8 +352,8 @@ export type COUNT_POSTS_QUERYResult = number;
 import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
-    "*[_type == \"post\"] | order(created_at desc)[0..$perPage]{\n    _id,\n    title,\n    description,\n    cover,\n    created_at,\n    \"slug\": slug.current,\n    author -> {\n        _id,\n        name,\n        avatar\n    }\n}": POSTS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug]{\n    _id,\n    cover,\n    title,\n    podcast,\n    created_at,\n    body,\n    author -> {\n      _id,\n      name,\n      avatar\n    }\n  }[0]": SINGLE_POST_QUERYResult;
+    "*[_type == \"post\"] | order(created_at desc)[0..$perPage]{\n    _id,\n    title,\n    description,\n    cover,\n    created_at,\n    \"slug\": slug.current,\n    \"tag\": tag->tag,\n    author -> {\n        _id,\n        name,\n        avatar\n    }\n}": POSTS_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug]{\n    _id,\n    cover,\n    title,\n    podcast,\n    created_at,\n    body,\n    subtitle,\n    \"tag\": tag->tag,\n    author -> {\n      _id,\n      name,\n      avatar,\n      socials\n    }\n  }[0]": SINGLE_POST_QUERYResult;
     "count(*[_type == \"post\" && !(_id in path('drafts.**'))])": COUNT_POSTS_QUERYResult;
   }
 }

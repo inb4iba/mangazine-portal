@@ -8,6 +8,7 @@ export const POSTS_QUERY =
     cover,
     created_at,
     "slug": slug.current,
+    "tag": tag->tag,
     author -> {
         _id,
         name,
@@ -23,6 +24,7 @@ export const PAGINATING_POSTS_QUERY =
     cover,
     created_at,
     "slug": slug.current,
+    "tag": tag->tag,
     author -> {
         _id,
         name,
@@ -38,10 +40,13 @@ export const SINGLE_POST_QUERY =
     podcast,
     created_at,
     body,
+    subtitle,
+    "tag": tag->tag,
     author -> {
       _id,
       name,
-      avatar
+      avatar,
+      socials
     }
   }[0]`);
 
