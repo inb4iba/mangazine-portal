@@ -1,13 +1,16 @@
 import { PaginationControls } from "@/components/PaginationControls";
 import { PostCard } from "@/components/PostCard";
 import { sanityFetch } from "@/sanity/lib/live";
-import { COUNT_POSTS_QUERY, POSTS_QUERY } from "@/sanity/queries/posts";
+import {
+  COUNT_POSTS_QUERY,
+  PAGINATING_POSTS_QUERY,
+} from "@/sanity/queries/posts";
 import { COUNT_POSTS_QUERYResult, POSTS_QUERYResult } from "@/sanity/types";
 import { getTotalPages } from "@/utils/pagination";
 
 const getPosts = async (perPage: number, page: number = 1) => {
   const { data } = await sanityFetch({
-    query: POSTS_QUERY,
+    query: PAGINATING_POSTS_QUERY,
     params: {
       perPage,
       page,
@@ -32,7 +35,7 @@ export default async function Home(props: {
 }) {
   const params = await props.searchParams;
   const page = params?.page;
-  const PER_PAGE = 10;
+  const PER_PAGE = 2;
   const postsCount: COUNT_POSTS_QUERYResult = await getPostsCount();
 
   const totalPages = getTotalPages(postsCount, PER_PAGE);
