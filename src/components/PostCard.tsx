@@ -27,9 +27,11 @@ export const PostCard = ({ addSeparator, post }: PostCardProps) => {
             fill
             className="object-cover"
           />
-          <span className="absolute w-fit px-3 py-1 text-sm bg-violet-500 text-white bottom-2 left-2 rounded">
+          <Link
+            href={`/?tag=${post.tag}`}
+            className="absolute w-fit px-3 py-1 text-sm bg-violet-500 text-white bottom-2 left-2 rounded">
             {post.tag}
-          </span>
+          </Link>
         </Link>
         <div className="flex flex-1 flex-col justify-between gap-2">
           <div className="flex flex-col gap-2">

@@ -4,6 +4,7 @@ import { AuthorNameplate } from "../AuthorNameplate";
 import { formatDate } from "@/utils/formatDate";
 import { SINGLE_POST_QUERYResult } from "@/sanity/types";
 import { Separator } from "../Separator";
+import Link from "next/link";
 
 type Props = {
   body: NonNullable<SINGLE_POST_QUERYResult>["body"];
@@ -36,9 +37,11 @@ export const PostDetails = ({ author, body, created_at, tag }: Props) => {
         <>
           <Separator className="hidden sm:block" />
           <div className="flex gap-2 px-6 sm:py-4 sm:flex-col sm:w-full justify-end">
-            <span className="flex w-fit px-3 py-1 rounded-full text-sm bg-violet-500 text-white">
+            <Link
+              href={`/?tag=${tag}`}
+              className="flex w-fit px-3 py-1 rounded-full text-sm bg-violet-500 text-white">
               {tag}
-            </span>
+            </Link>
           </div>
         </>
       )}

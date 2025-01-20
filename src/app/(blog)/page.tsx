@@ -3,12 +3,26 @@ import { PostCard } from "@/components/PostCard";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   COUNT_POSTS_QUERY,
+  FILTER_POSTS_BY_TAG_QUERY,
   PAGINATING_POSTS_QUERY,
 } from "@/sanity/queries/posts";
 import { COUNT_POSTS_QUERYResult, POSTS_QUERYResult } from "@/sanity/types";
 import { getTotalPages } from "@/utils/pagination";
 
-const getPosts = async (perPage: number, page: number = 1) => {
+const getPosts = async (perPage: number, page: number = 1, tag?: string) => {
+  if (tag) {
+    const { data } = await sanityFetch({
+      query: FILTER_POSTS_BY_TAG_QUERY,
+      params: {
+        perPage,
+        page,
+        postTag: tag,
+      },
+    });
+
+    return data;
+  }
+
   const { data } = await sanityFetch({
     query: PAGINATING_POSTS_QUERY,
     params: {
@@ -31,10 +45,12 @@ const getPostsCount = async () => {
 export default async function Home(props: {
   searchParams?: Promise<{
     page?: string;
+    tag?: string;
   }>;
 }) {
   const params = await props.searchParams;
   const page = params?.page;
+  const tag = params?.tag;
   const PER_PAGE = 10;
   const postsCount: COUNT_POSTS_QUERYResult = await getPostsCount();
 
@@ -45,7 +61,8 @@ export default async function Home(props: {
 
   const posts: POSTS_QUERYResult = await getPosts(
     PER_PAGE,
-    page ? (Number.isNaN(page) ? undefined : Number(page)) : undefined
+    page ? (Number.isNaN(page) ? undefined : Number(page)) : undefined,
+    tag
   );
 
   return (
