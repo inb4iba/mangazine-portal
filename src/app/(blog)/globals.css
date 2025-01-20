@@ -6,10 +6,10 @@
   background: rgb(255, 190, 225);
   background: radial-gradient(
     circle,
-    rgba(255, 236, 125, 0.5) 18%,
-    rgba(255, 161, 115, 0.5) 46%,
-    rgba(255, 132, 213, 0.75) 68%,
-    rgba(255, 190, 225, 0.75) 100%
+    #fddf6799 18%,
+    #f8af5a99 46%,
+    #ff97d699 68%,
+    #fec0e799 100%
   );
   /* background: rgb(255, 190, 225);
   background: linear-gradient(

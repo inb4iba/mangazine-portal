@@ -13,7 +13,7 @@ export const Header = () => {
           placeholder="Pesquisar"
           name="search"
           id="search"
-          className="outline-none focus:border-b border-zinc-800 hidden sm:block text-end bg-white bg-opacity-40 px-2 py-1 rounded-md"
+          className="outline-none focus:border-b border-zinc-800 hidden sm:block text-end bg-white/65 px-2 py-1 rounded-md"
         />
         <div className="w-12 aspect-square bg-zinc-600 sm:hidden"></div>
       </div>
