@@ -51,8 +51,13 @@ export const Carosel = ({ posts }: Props) => {
               fill
               className="object-cover"
             />
-            <div
-              className={`absolute inset-0 ${idx === selected ? "opacity-0" : "opacity-25"} bg-violet-500 hover:cursor-pointer`}></div>
+            {idx === selected ? (
+              <div
+                className={`absolute inset-0 bg-gradient-to-b from-transparent to-black/90 hover:cursor-pointer`}></div>
+            ) : (
+              <div
+                className={`absolute inset-0 ${idx === selected ? "opacity-0" : "opacity-25"} bg-violet-500 hover:cursor-pointer`}></div>
+            )}
           </div>
         );
       })}

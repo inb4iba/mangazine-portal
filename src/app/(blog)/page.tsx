@@ -11,12 +11,17 @@ import {
 import { COUNT_POSTS_QUERYResult, POSTS_QUERYResult } from "@/sanity/types";
 import { getTotalPages } from "@/utils/pagination";
 
-const getPosts = async (
-  perPage: number,
-  page: number = 1,
-  tag?: string,
-  s?: string
-) => {
+const getPosts = async ({
+  perPage,
+  page = 1,
+  tag,
+  s,
+}: {
+  perPage: number;
+  page?: number;
+  tag?: string;
+  s?: string;
+}) => {
   if (tag) {
     const { data } = await sanityFetch({
       query: FILTER_POSTS_BY_TAG_QUERY,
@@ -81,22 +86,32 @@ export default async function Home(props: {
   if (page && (Number(page) > totalPages || Number(page) < 1))
     throw new Error("Página inválida!");
 
-  const posts: POSTS_QUERYResult = await getPosts(
-    PER_PAGE,
-    page ? (Number.isNaN(page) ? undefined : Number(page)) : undefined,
+  const posts: POSTS_QUERYResult = await getPosts({
+    perPage: PER_PAGE,
+    page: page ? (Number.isNaN(page) ? undefined : Number(page)) : undefined,
     tag,
-    s
-  );
+    s,
+  });
+
+  const featuredPosts: POSTS_QUERYResult = await getPosts({
+    perPage: 3,
+    tag: "Podcast",
+  });
 
   return (
     <main className="flex justify-center flex-1">
       <div className="flex flex-col xl:w-[1248px] bg-white/65 sm:rounded-b-3xl lg:rounded-3xl backdrop-blur-lg overflow-hidden">
-        <Carosel posts={posts.filter((p, idx) => idx < 3)} />
+        <Carosel posts={featuredPosts} />
         <div className="flex flex-col sm:flex-row gap-5 p-4 sm:p-8">
           <section className="flex flex-col flex-1 gap-5 justify-between">
-            {posts.map((post, idx) => (
-              <PostCard addSeparator={idx !== 0} key={post._id} post={post} />
-            ))}
+            {posts
+              .filter(
+                (post) =>
+                  !featuredPosts.some((featured) => post._id === featured._id)
+              )
+              .map((post, idx) => (
+                <PostCard addSeparator={idx !== 0} key={post._id} post={post} />
+              ))}
             <PaginationControls pagesCount={totalPages} />
           </section>
           <section className="flex bg-zinc-300 h-80 lg:h-full lg:w-60"></section>
