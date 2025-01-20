@@ -42,7 +42,7 @@ export const Carosel = ({ posts }: Props) => {
       {posts.map((post, idx) => {
         return (
           <div
-            className={`relative flex transition-all duration-700 ${idx === 0 ? "" : "border-l-4"} ${idx === selected ? "flex-[8]" : "flex-1"} h-full border-white border-out`}
+            className={`relative flex transition-all duration-700 ${idx === 0 ? "" : "border-l-4"} ${idx === selected ? "flex-[5] sm:flex-[8]" : "flex-1"} h-full border-white border-out`}
             key={post._id}
             onMouseEnter={() => updateSelection(idx)}>
             <Image

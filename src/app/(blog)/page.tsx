@@ -92,7 +92,7 @@ export default async function Home(props: {
     <main className="flex justify-center flex-1">
       <div className="flex flex-col xl:w-[1248px] bg-white/65 sm:rounded-b-3xl lg:rounded-3xl backdrop-blur-lg overflow-hidden">
         <Carosel posts={posts.filter((p, idx) => idx < 3)} />
-        <div className="flex gap-5 p-4 sm:p-8">
+        <div className="flex flex-col sm:flex-row gap-5 p-4 sm:p-8">
           <section className="flex flex-col flex-1 gap-5 justify-between">
             {posts.map((post, idx) => (
               <PostCard addSeparator={idx !== 0} key={post._id} post={post} />
