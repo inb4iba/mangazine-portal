@@ -4,6 +4,7 @@ import { urlFor } from "@/sanity/lib/image";
 import { POSTS_QUERYResult } from "@/sanity/types";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 type Props = {
@@ -45,22 +46,26 @@ export const Carosel = ({ posts }: Props) => {
             className={`relative flex transition-all duration-700 ${idx === 0 ? "" : "border-l-4"} ${idx === selected ? "flex-[9]" : "flex-1"} h-full border-white border-out`}
             key={post._id}
             onMouseEnter={() => updateSelection(idx)}>
-            <Image
-              src={urlFor(post.cover as SanityImageSource).url()}
-              alt="cover image"
-              fill
-              className="object-cover"
-            />
-            <div
-              className={`absolute inset-0 bg-gradient-to-b from-transparent to-black/90 hover:cursor-pointer flex items-end ${idx !== selected ? "opacity-0" : "opacity-100"}`}>
+            <Link href={`/posts/${post.slug}`}>
+              <Image
+                src={urlFor(post.cover as SanityImageSource).url()}
+                alt="cover image"
+                fill
+                className="object-cover"
+              />
               <div
-                className={`flex flex-col gap-2 p-4 text-white transition-opacity delay-500 duration-500 ${idx !== selected ? "opacity-0" : "opacity-100"}`}>
-                <h3 className="text-xl lg:text-2xl font-bold">{post.title}</h3>
-                <p className="text-md lg:text-lg text-white lg:w-11/12">
-                  {post.description}
-                </p>
+                className={`absolute inset-0 bg-gradient-to-b from-transparent to-black/90 hover:cursor-pointer flex items-end ${idx !== selected ? "opacity-0" : "opacity-100"}`}>
+                <div
+                  className={`flex flex-col gap-2 p-4 text-white transition-opacity delay-500 duration-500 ${idx !== selected ? "opacity-0" : "opacity-100"}`}>
+                  <h3 className="text-xl lg:text-2xl font-bold">
+                    {post.title}
+                  </h3>
+                  <p className="text-md lg:text-lg text-white lg:w-11/12">
+                    {post.description}
+                  </p>
+                </div>
               </div>
-            </div>
+            </Link>
           </div>
         );
       })}
