@@ -18,21 +18,21 @@ export const PostCard = ({ addSeparator, post }: PostCardProps) => {
     <article key={post._id} className="flex flex-col gap-5">
       {addSeparator && <Separator />}
       <div className="flex flex-col sm:flex-row flex-grow gap-3">
-        <Link
-          href={`/posts/${post.slug}`}
-          className="relative aspect-video sm:aspect-square lg:aspect-video flex sm:w-1/3 lg:w-2/5 items-center">
-          <Image
-            src={urlFor(post.cover as SanityImageSource).url()}
-            alt="cover image"
-            fill
-            className="object-cover"
-          />
-          <Link
-            href={`/?tag=${post.tag}`}
-            className="absolute w-fit px-3 py-1 text-sm bg-violet-500 text-white bottom-2 left-2 rounded">
-            {post.tag}
+        <div className="relative aspect-video sm:aspect-square lg:aspect-video flex sm:w-1/3 lg:w-2/5 items-center">
+          <Link href={`/posts/${post.slug}`}>
+            <Image
+              src={urlFor(post.cover as SanityImageSource).url()}
+              alt="cover image"
+              fill
+              className="object-cover"
+            />
           </Link>
-        </Link>
+          <Link href={`/?tag=${post.tag}`}>
+            <span className="absolute w-fit px-3 py-1 text-sm bg-violet-500 text-white bottom-2 left-2 rounded z-10">
+              {post.tag}
+            </span>
+          </Link>
+        </div>
         <div className="flex flex-1 flex-col justify-between gap-2">
           <div className="flex flex-col gap-2">
             <Link href={`/posts/${post.slug}`}>
