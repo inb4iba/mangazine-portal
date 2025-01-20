@@ -3,13 +3,19 @@ import { PostCard } from "@/components/PostCard";
 import { sanityFetch } from "@/sanity/lib/live";
 import {
   COUNT_POSTS_QUERY,
+  FILTER_POSTS_BY_SEARCH_QUERY,
   FILTER_POSTS_BY_TAG_QUERY,
   PAGINATING_POSTS_QUERY,
 } from "@/sanity/queries/posts";
 import { COUNT_POSTS_QUERYResult, POSTS_QUERYResult } from "@/sanity/types";
 import { getTotalPages } from "@/utils/pagination";
 
-const getPosts = async (perPage: number, page: number = 1, tag?: string) => {
+const getPosts = async (
+  perPage: number,
+  page: number = 1,
+  tag?: string,
+  s?: string
+) => {
   if (tag) {
     const { data } = await sanityFetch({
       query: FILTER_POSTS_BY_TAG_QUERY,
@@ -17,6 +23,19 @@ const getPosts = async (perPage: number, page: number = 1, tag?: string) => {
         perPage,
         page,
         postTag: tag,
+      },
+    });
+
+    return data;
+  }
+
+  if (s) {
+    const { data } = await sanityFetch({
+      query: FILTER_POSTS_BY_SEARCH_QUERY,
+      params: {
+        perPage,
+        page,
+        s: s,
       },
     });
 
@@ -46,11 +65,13 @@ export default async function Home(props: {
   searchParams?: Promise<{
     page?: string;
     tag?: string;
+    s?: string;
   }>;
 }) {
   const params = await props.searchParams;
   const page = params?.page;
   const tag = params?.tag;
+  const s = params?.s;
   const PER_PAGE = 10;
   const postsCount: COUNT_POSTS_QUERYResult = await getPostsCount();
 
@@ -62,13 +83,14 @@ export default async function Home(props: {
   const posts: POSTS_QUERYResult = await getPosts(
     PER_PAGE,
     page ? (Number.isNaN(page) ? undefined : Number(page)) : undefined,
-    tag
+    tag,
+    s
   );
 
   return (
     <main className="flex justify-center flex-1">
       <div className="flex flex-col lg:flex-row xl:w-[1248px] gap-5 p-4 sm:p-8 bg-white/65 sm:rounded-b-3xl lg:rounded-3xl backdrop-blur-lg">
-        <section className="flex flex-col flex-1 gap-5">
+        <section className="flex flex-col flex-1 gap-5 justify-between">
           {posts.map((post, idx) => (
             <PostCard addSeparator={idx !== 0} key={post._id} post={post} />
           ))}
