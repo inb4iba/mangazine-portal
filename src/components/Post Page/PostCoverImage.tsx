@@ -21,7 +21,7 @@ export const PostCoverImage = ({ coverUrl, title, subtitle }: Props) => {
   }, []);
 
   return (
-    <section className="relative w-full overflow-hidden h-96 rounded-b-3xl">
+    <section className="relative w-full overflow-hidden h-96 rounded-b-3xl lg:rounded-3xl">
       <Image
         src={coverUrl}
         alt="cover image"

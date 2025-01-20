@@ -50,7 +50,7 @@ export default async function Home(props: {
 
   return (
     <main className="flex justify-center flex-1">
-      <div className="flex flex-col lg:flex-row xl:w-[1248px] gap-5 px-4 pb-4 sm:px-8 lg:p-8 lg:bg-white/65 lg:rounded-3xl backdrop-blur-2xl">
+      <div className="flex flex-col lg:flex-row xl:w-[1248px] gap-5 p-4 sm:p-8 bg-white/65 sm:rounded-b-3xl lg:rounded-3xl backdrop-blur-lg">
         <section className="flex flex-col flex-1 gap-5">
           {posts.map((post, idx) => (
             <PostCard addSeparator={idx !== 0} key={post._id} post={post} />

@@ -32,7 +32,7 @@ const Post = async ({ params }: PostProps) => {
 
   return (
     <main className="flex justify-center flex-1">
-      <div className="flex flex-col xl:w-[1248px] pb-2 gap-2">
+      <div className="flex flex-col xl:w-[1248px] pb-2 gap-2 bg-white/55 backdrop-blur-lg rounded-3xl">
         <PostCoverImage
           coverUrl={urlFor(post.cover as SanityImageSource).url()}
           title={post.title || ""}
