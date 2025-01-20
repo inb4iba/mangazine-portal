@@ -35,14 +35,14 @@ export const Carosel = ({ posts }: Props) => {
 
   return (
     <section
-      className="flex w-full h-96 relative"
+      className="flex w-full h-[520px] sm:h-96 relative"
       onMouseLeave={() => {
         startAutoplay();
       }}>
       {posts.map((post, idx) => {
         return (
           <div
-            className={`relative flex transition-all duration-700 ${idx === 0 ? "" : "border-l-4"} ${idx === selected ? "flex-[5] sm:flex-[8]" : "flex-1"} h-full border-white border-out`}
+            className={`relative flex transition-all duration-700 ${idx === 0 ? "" : "border-l-4"} ${idx === selected ? "flex-[9]" : "flex-1"} h-full border-white border-out`}
             key={post._id}
             onMouseEnter={() => updateSelection(idx)}>
             <Image
@@ -51,13 +51,16 @@ export const Carosel = ({ posts }: Props) => {
               fill
               className="object-cover"
             />
-            {idx === selected ? (
+            <div
+              className={`absolute inset-0 bg-gradient-to-b from-transparent to-black/90 hover:cursor-pointer flex items-end ${idx !== selected ? "opacity-0" : "opacity-100"}`}>
               <div
-                className={`absolute inset-0 bg-gradient-to-b from-transparent to-black/90 hover:cursor-pointer`}></div>
-            ) : (
-              <div
-                className={`absolute inset-0 ${idx === selected ? "opacity-0" : "opacity-25"} bg-violet-500 hover:cursor-pointer`}></div>
-            )}
+                className={`flex flex-col gap-2 p-4 text-white transition-opacity delay-500 duration-500 ${idx !== selected ? "opacity-0" : "opacity-100"}`}>
+                <h3 className="text-xl lg:text-2xl font-bold">{post.title}</h3>
+                <p className="text-md lg:text-lg text-white lg:w-11/12">
+                  {post.description}
+                </p>
+              </div>
+            </div>
           </div>
         );
       })}
