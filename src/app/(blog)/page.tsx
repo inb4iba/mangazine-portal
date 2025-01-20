@@ -35,7 +35,7 @@ export default async function Home(props: {
 }) {
   const params = await props.searchParams;
   const page = params?.page;
-  const PER_PAGE = 2;
+  const PER_PAGE = 10;
   const postsCount: COUNT_POSTS_QUERYResult = await getPostsCount();
 
   const totalPages = getTotalPages(postsCount, PER_PAGE);
@@ -50,7 +50,7 @@ export default async function Home(props: {
 
   return (
     <main className="flex justify-center flex-1">
-      <div className="flex flex-col lg:flex-row xl:w-[1248px] gap-5 px-4 pb-4 sm:px-8 lg:pb-8">
+      <div className="flex flex-col lg:flex-row xl:w-[1248px] gap-5 px-4 pb-4 sm:px-8 lg:p-8 lg:bg-white/40 lg:rounded-3xl backdrop-blur-2xl">
         <section className="flex flex-col flex-1 gap-5">
           {posts.map((post, idx) => (
             <PostCard addSeparator={idx !== 0} key={post._id} post={post} />
