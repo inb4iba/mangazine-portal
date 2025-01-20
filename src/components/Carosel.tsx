@@ -46,7 +46,9 @@ export const Carosel = ({ posts }: Props) => {
             className={`relative flex transition-all duration-700 ${idx === 0 ? "" : "border-l-4"} ${idx === selected ? "flex-[9]" : "flex-1"} h-full border-white border-out`}
             key={post._id}
             onMouseEnter={() => updateSelection(idx)}>
-            <Link href={`/posts/${post.slug}`}>
+            <Link
+              href={`/posts/${post.slug}`}
+              style={{ pointerEvents: selected === idx ? "auto" : "none" }}>
               <Image
                 src={urlFor(post.cover as SanityImageSource).url()}
                 alt="cover image"
