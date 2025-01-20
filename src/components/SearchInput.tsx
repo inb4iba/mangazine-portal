@@ -17,7 +17,11 @@ export const SearchInput = ({ submitSearch }: Props) => {
   const onKeyRelease = (e: KeyboardEvent<HTMLInputElement>) => {
     if (e.key !== "Enter") return;
 
-    submitSearch((e.target as HTMLInputElement).value);
+    if (searchInputRef.current) {
+      submitSearch(searchInputRef.current.value);
+      searchInputRef.current.value = "";
+      searchInputRef.current.blur();
+    }
   };
 
   const showSearchInput = () => {
