@@ -18,7 +18,6 @@ export const Header = () => {
           mangazine
         </Link>
         <SearchInput submitSearch={submitSearch} />
-        <div className="w-12 aspect-square bg-zinc-600 sm:hidden"></div>
       </div>
     </header>
   );
