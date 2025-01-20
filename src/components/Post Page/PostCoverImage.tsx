@@ -6,9 +6,10 @@ import { useEffect, useState } from "react";
 type Props = {
   coverUrl: string;
   title: string;
+  subtitle: string;
 };
 
-export const PostCoverImage = ({ coverUrl, title }: Props) => {
+export const PostCoverImage = ({ coverUrl, title, subtitle }: Props) => {
   const [offset, setOffset] = useState(0);
 
   useEffect(() => {
@@ -36,10 +37,7 @@ export const PostCoverImage = ({ coverUrl, title }: Props) => {
         <h1 className="text-2xl font-bold lg:text-4xl lg:w-3/4 text-zinc-100">
           {title}
         </h1>
-        <p className="text-zinc-100 lg:text-lg lg:w-3/4">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit assumenda
-          fugit hic ullam libero sunt consectetur qui consequatur ea.
-        </p>
+        <p className="text-zinc-100 lg:text-lg lg:w-3/4">{subtitle}</p>
       </div>
     </section>
   );

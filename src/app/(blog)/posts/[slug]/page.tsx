@@ -36,6 +36,7 @@ const Post = async ({ params }: PostProps) => {
         <PostCoverImage
           coverUrl={urlFor(post.cover as SanityImageSource).url()}
           title={post.title || ""}
+          subtitle={post.subtitle || ""}
         />
         <div className="relative flex flex-col-reverse flex-grow sm:flex-row lg:gap-20">
           <section className="flex flex-col flex-grow gap-5 p-4 sm:px-8 lg:px-6">
@@ -53,6 +54,7 @@ const Post = async ({ params }: PostProps) => {
             author={post.author}
             body={post.body}
             created_at={post.created_at || ""}
+            tag={post.tag}
           />
         </div>
       </div>
