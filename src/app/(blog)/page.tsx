@@ -1,4 +1,4 @@
-import { Carosel } from "@/components/Carosel";
+import { Carousel } from "@/components/Carousel";
 import { PaginationControls } from "@/components/PaginationControls";
 import { PostCard } from "@/components/PostCard";
 import { sanityFetch } from "@/sanity/lib/live";
@@ -101,7 +101,7 @@ export default async function Home(props: {
   return (
     <main className="flex justify-center flex-1">
       <div className="flex flex-col w-full xl:w-[1248px] bg-white/65 sm:rounded-b-3xl lg:rounded-3xl backdrop-blur-lg overflow-hidden">
-        <Carosel posts={featuredPosts} />
+        <Carousel posts={featuredPosts} />
         <div className="flex flex-col flex-1 lg:flex-row gap-5 p-4 sm:p-8">
           <section className="flex flex-col w-full sm:flex-1 gap-5 justify-between">
             {posts

@@ -11,7 +11,7 @@ type Props = {
   posts: POSTS_QUERYResult;
 };
 
-export const Carosel = ({ posts }: Props) => {
+export const Carousel = ({ posts }: Props) => {
   const [selected, setSelected] = useState(0);
   const [autoplay, setAutoplay] = useState<boolean>(true);
 
