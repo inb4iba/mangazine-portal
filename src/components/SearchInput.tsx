@@ -1,5 +1,6 @@
 "use client";
 
+import { Search } from "lucide-react";
 import { KeyboardEvent, useEffect, useRef, useState } from "react";
 
 type Props = {
@@ -41,8 +42,10 @@ export const SearchInput = ({ submitSearch }: Props) => {
         ref={searchInputRef}
       />
       <div
-        className="flex justify-center items-centerw-12 w-8 bg-red-500 aspect-square sm:hidden"
-        onClick={showSearchInput}></div>
+        className="flex justify-center items-center w-8 aspect-square sm:hidden"
+        onClick={showSearchInput}>
+        <Search color="black" />
+      </div>
     </>
   );
 };
