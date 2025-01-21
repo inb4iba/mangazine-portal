@@ -23,28 +23,32 @@ export const PostDetails = ({ author, body, created_at, tag }: Props) => {
           <span className="hidden font-medium sm:inline-block">
             Escrito por
           </span>
-          <AuthorNameplate author={author} />
+          <AuthorNameplate author={author} showSocials={true} />
         </div>
         <Separator className="hidden sm:block" />
-        <div className="flex gap-2 px-6 py-4 sm:flex-col sm:w-full">
-          <span className="hidden font-medium sm:inline-block">
-            Data de publicação:{" "}
-          </span>
-          <span className="text-violet-600">{formatDate(created_at)}</span>
+        <div className="flex gap-1 flex-col sm:w-full">
+          <div className="px-6 pt-4 flex flex-col">
+            <span className="hidden font-medium sm:inline-block">
+              Data de publicação:{" "}
+            </span>
+            <span className="text-violet-600 sm:pb-4">
+              {formatDate(created_at)}
+            </span>
+          </div>
+          {tag && (
+            <>
+              <Separator className="hidden sm:block p-0" />
+              <div className="flex gap-2 px-6 sm:py-4 sm:flex-col sm:w-full justify-end h-fit">
+                <Link
+                  href={`/?tag=${tag}`}
+                  className="flex w-fit px-3 py-1 rounded-full text-sm bg-violet-500 text-white">
+                  {tag}
+                </Link>
+              </div>
+            </>
+          )}
         </div>
       </div>
-      {tag && (
-        <>
-          <Separator className="hidden sm:block" />
-          <div className="flex gap-2 px-6 sm:py-4 sm:flex-col sm:w-full justify-end">
-            <Link
-              href={`/?tag=${tag}`}
-              className="flex w-fit px-3 py-1 rounded-full text-sm bg-violet-500 text-white">
-              {tag}
-            </Link>
-          </div>
-        </>
-      )}
     </aside>
   );
 };
