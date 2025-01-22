@@ -1,3 +1,4 @@
+import { getCache, isCacheValid, setCache } from "@/services/cache";
 import axios from "axios";
 import * as cheerio from "cheerio";
 import { NextRequest, NextResponse } from "next/server";
@@ -9,11 +10,15 @@ export async function GET(
   const { term } = await params;
 
   try {
-    const items = await getDeals(term);
+    if (isCacheValid(term)) {
+      const cachedItems = getCache(term);
+      return NextResponse.json({ data: cachedItems }, { status: 200 });
+    }
 
-    return NextResponse.json({
-      data: items,
-    });
+    const scrapedItems = await getDeals(term);
+    setCache(term, scrapedItems);
+
+    return NextResponse.json({ data: scrapedItems }, { status: 200 });
   } catch (error) {
     if (error instanceof Error)
       return NextResponse.json({
@@ -34,7 +39,7 @@ const getDeals = async (s: string) => {
     img: string;
     title: string;
     price: string;
-    fullPrice?: string;
+    fullPrice: string;
   }[] = [];
 
   try {
@@ -54,7 +59,6 @@ const getDeals = async (s: string) => {
       const title = item.find("[data-cy='title-recipe'] h2 span").text();
       const priceDiv = item.find(".a-price").first().parent();
       const priceEls = priceDiv.find(".a-price");
-      console.log(priceEls.length);
       const price = `${$(priceEls.first()).find(".a-price-whole").text()}${$(priceEls.first()).find(".a-price-fraction").text()}`;
       const fullPrice = `${$(priceEls.last()).find("[aria-hidden='true']").text()}`;
       if (img) items.push({ img, title, price, fullPrice });
