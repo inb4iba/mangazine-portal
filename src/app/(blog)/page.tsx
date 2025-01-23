@@ -123,7 +123,7 @@ export default async function Home(props: {
             </div> */}
             <div>
               {posts
-                .filter((post) => true)
+                .filter(() => true)
                 .map((post, idx) => (
                   <PostCard
                     addSeparator={idx !== 0}
@@ -132,7 +132,7 @@ export default async function Home(props: {
                   />
                 ))}
               {posts
-                .filter((post) => true)
+                .filter(() => true)
                 .map((post, idx) => (
                   <PostCard
                     addSeparator={idx !== 0}

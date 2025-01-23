@@ -68,6 +68,7 @@ const getDeals = async (s: string) => {
 
     return items;
   } catch (err) {
+    if (err instanceof Error) console.log(`ERROR: ${err.message}`);
     throw new Error("Couldn't get Amazon response!");
   }
 };

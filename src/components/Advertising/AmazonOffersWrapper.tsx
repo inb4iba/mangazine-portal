@@ -1,5 +1,4 @@
 import { OfferDetail } from "@/services/cache";
-import Image from "next/image";
 import { AmazonOffers } from "./AmazonOffers";
 
 type Props = {
