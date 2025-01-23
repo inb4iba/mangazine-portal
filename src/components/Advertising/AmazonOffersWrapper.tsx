@@ -6,15 +6,16 @@ type Props = {
 };
 
 export const AmazonOffersWrapper = async ({ term }: Props) => {
+  const url = `${process.env.NEXT_PUBLIC_URL}/api/amazon/${term}`;
+
   const fetchOffers = async () => {
-    const res = await fetch(
-      `${process.env.NEXT_PUBLIC_URL}/api/amazon/${term}`
-    );
-    const { data } = await res.json();
-    if (data) {
-      return data;
-    } else {
-      console.log("Não tem data");
+    try {
+      const res = await fetch(url);
+      const { data } = await res.json();
+      if (data) return data;
+    } catch (error) {
+      console.error("FETCHING API URL:", url);
+      console.error(error);
     }
   };
 
