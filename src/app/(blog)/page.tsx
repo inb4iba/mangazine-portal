@@ -1,4 +1,4 @@
-import { AmazonOffers } from "@/components/Advertising/AmazonOffers";
+import { AmazonOffersWrapper } from "@/components/Advertising/AmazonOffersWrapper";
 import { Carousel } from "@/components/Carousel";
 import { PaginationControls } from "@/components/PaginationControls";
 import { PostCard } from "@/components/PostCard";
@@ -104,7 +104,9 @@ export default async function Home(props: {
       <div className="flex flex-col w-full xl:w-[1248px] bg-white/65 sm:rounded-b-3xl lg:rounded-3xl backdrop-blur-lg overflow-hidden">
         <Carousel posts={featuredPosts} />
         <div className="flex flex-col flex-1 lg:flex-row gap-5 p-4 sm:p-8">
-          <section className="flex flex-col w-full sm:flex-1 gap-5 justify-between">
+          <section
+            id="posts-container"
+            className="flex flex-col w-full sm:flex-1 gap-5 justify-between">
             <div>
               {posts
                 .filter(
@@ -119,10 +121,30 @@ export default async function Home(props: {
                   />
                 ))}
             </div>
+            {/* <div>
+              {posts
+                .filter((post) => true)
+                .map((post, idx) => (
+                  <PostCard
+                    addSeparator={idx !== 0}
+                    key={post._id}
+                    post={post}
+                  />
+                ))}
+              {posts
+                .filter((post) => true)
+                .map((post, idx) => (
+                  <PostCard
+                    addSeparator={idx !== 0}
+                    key={post._id}
+                    post={post}
+                  />
+                ))}
+            </div> */}
             <PaginationControls pagesCount={totalPages} />
           </section>
           <section className="flex h-80 lg:h-full lg:w-60">
-            <AmazonOffers term="manga" />
+            <AmazonOffersWrapper term="manga" />
           </section>
         </div>
       </div>

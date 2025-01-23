@@ -16,7 +16,7 @@ export type PostCardProps = {
 export const PostCard = ({ addSeparator, post }: PostCardProps) => {
   return (
     <article key={post._id} className="flex flex-col gap-5">
-      {addSeparator && <Separator />}
+      {addSeparator && <Separator className="mt-4" />}
       <div className="flex flex-col sm:flex-row flex-grow gap-3">
         <div className="relative aspect-video sm:aspect-square lg:aspect-video flex sm:w-1/3 lg:w-2/5 items-center">
           <Link href={`/posts/${post.slug}`}>

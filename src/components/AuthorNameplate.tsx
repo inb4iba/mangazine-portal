@@ -1,5 +1,5 @@
 import { urlFor } from "@/sanity/lib/image";
-import { SINGLE_POST_QUERYResult } from "@/sanity/types";
+import { POSTS_QUERYResult, SINGLE_POST_QUERYResult } from "@/sanity/types";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import Image from "next/image";
 
@@ -14,7 +14,9 @@ import spotify from "@/socials/spotify.svg";
 import Link from "next/link";
 
 type AuthorNameplateProps = {
-  author: NonNullable<SINGLE_POST_QUERYResult>["author"];
+  author:
+    | NonNullable<SINGLE_POST_QUERYResult>["author"]
+    | NonNullable<POSTS_QUERYResult[number]>["author"];
   showSocials?: boolean;
 };
 
@@ -37,7 +39,7 @@ export const AuthorNameplate = ({
         <span className="font-medium">{author.name}</span>
       </div>
       {/* TODO - Move socials to another component and rethink the logic to automate socials */}
-      {showSocials && (
+      {showSocials && "socials" in author && (
         <div className="flex gap-2">
           {author.socials?.instagram && (
             <Link
