@@ -1,3 +1,4 @@
+import { AmazonOffers } from "@/components/Advertising/AmazonOffers";
 import { Carousel } from "@/components/Carousel";
 import { PaginationControls } from "@/components/PaginationControls";
 import { PostCard } from "@/components/PostCard";
@@ -104,17 +105,25 @@ export default async function Home(props: {
         <Carousel posts={featuredPosts} />
         <div className="flex flex-col flex-1 lg:flex-row gap-5 p-4 sm:p-8">
           <section className="flex flex-col w-full sm:flex-1 gap-5 justify-between">
-            {posts
-              .filter(
-                (post) =>
-                  !featuredPosts.some((featured) => post._id === featured._id)
-              )
-              .map((post, idx) => (
-                <PostCard addSeparator={idx !== 0} key={post._id} post={post} />
-              ))}
+            <div>
+              {posts
+                .filter(
+                  (post) =>
+                    !featuredPosts.some((featured) => post._id === featured._id)
+                )
+                .map((post, idx) => (
+                  <PostCard
+                    addSeparator={idx !== 0}
+                    key={post._id}
+                    post={post}
+                  />
+                ))}
+            </div>
             <PaginationControls pagesCount={totalPages} />
           </section>
-          <section className="flex bg-violet-500 h-80 lg:h-full lg:w-60"></section>
+          <section className="flex h-80 lg:h-full lg:w-60">
+            <AmazonOffers term="manga" />
+          </section>
         </div>
       </div>
     </main>
