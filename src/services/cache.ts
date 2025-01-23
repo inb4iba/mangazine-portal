@@ -1,4 +1,5 @@
 export type OfferDetail = {
+  link: string;
   title: string;
   img: string;
   price: string;

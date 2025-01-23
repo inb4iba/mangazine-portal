@@ -107,7 +107,7 @@ export default async function Home(props: {
           <section
             id="posts-container"
             className="flex flex-col w-full sm:flex-1 gap-5 justify-between">
-            <div>
+            {/* <div>
               {posts
                 .filter(
                   (post) =>
@@ -120,27 +120,27 @@ export default async function Home(props: {
                     post={post}
                   />
                 ))}
-            </div>
-            {/* <div>
-              {posts
-                .filter((post) => true)
-                .map((post, idx) => (
-                  <PostCard
-                    addSeparator={idx !== 0}
-                    key={post._id}
-                    post={post}
-                  />
-                ))}
-              {posts
-                .filter((post) => true)
-                .map((post, idx) => (
-                  <PostCard
-                    addSeparator={idx !== 0}
-                    key={post._id}
-                    post={post}
-                  />
-                ))}
             </div> */}
+            <div>
+              {posts
+                .filter((post) => true)
+                .map((post, idx) => (
+                  <PostCard
+                    addSeparator={idx !== 0}
+                    key={post._id}
+                    post={post}
+                  />
+                ))}
+              {posts
+                .filter((post) => true)
+                .map((post, idx) => (
+                  <PostCard
+                    addSeparator={idx !== 0}
+                    key={post._id}
+                    post={post}
+                  />
+                ))}
+            </div>
             <PaginationControls pagesCount={totalPages} />
           </section>
           <section className="flex h-80 lg:h-full lg:w-60">

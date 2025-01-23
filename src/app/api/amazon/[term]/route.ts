@@ -36,6 +36,7 @@ export async function GET(
 const getDeals = async (s: string) => {
   const url = `https://www.amazon.com.br/s?k=${s}`;
   const items: {
+    link: string;
     img: string;
     title: string;
     price: string;
@@ -55,13 +56,14 @@ const getDeals = async (s: string) => {
     });
     itemsWithOffer.each((idx, el) => {
       const item = $(el);
+      const link = $(item.find("a")[0]).attr("href")!.split("?")[0];
       const img = item.find("img.s-image").attr("src");
       const title = item.find("[data-cy='title-recipe'] h2 span").text();
       const priceDiv = item.find(".a-price").first().parent();
       const priceEls = priceDiv.find(".a-price");
       const price = `${$(priceEls.first()).find(".a-price-whole").text()}${$(priceEls.first()).find(".a-price-fraction").text()}`;
       const fullPrice = `${$(priceEls.last()).find("[aria-hidden='true']").text()}`;
-      if (img) items.push({ img, title, price, fullPrice });
+      if (img) items.push({ img, title, price, fullPrice, link });
     });
 
     return items;

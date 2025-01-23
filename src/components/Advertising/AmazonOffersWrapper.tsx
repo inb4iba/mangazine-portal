@@ -22,7 +22,7 @@ export const AmazonOffersWrapper = async ({ term }: Props) => {
   const data: OfferDetail[] = await fetchOffers();
 
   return (
-    <div className="flex flex-col gap-4 items-end">
+    <div className="flex flex-col gap-5 items-end">
       <AmazonOffers offers={data} />
     </div>
   );
