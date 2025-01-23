@@ -15,7 +15,7 @@ export const AmazonOffersWrapper = async ({ term }: Props) => {
       if (data) return data;
     } catch (error) {
       console.error("FETCHING API URL:", url);
-      console.error(error);
+      console.error("ERROR: ", error);
     }
   };
 
