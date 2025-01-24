@@ -68,6 +68,17 @@ export type Geopoint = {
   alt?: number;
 };
 
+export type Manga = {
+  _id: string;
+  _type: "manga";
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  title?: string;
+  imageUrl?: string;
+  link?: string;
+};
+
 export type Post = {
   _id: string;
   _type: "post";
@@ -101,6 +112,13 @@ export type Post = {
     _weak?: boolean;
     [internalGroqTypeReferenceTo]?: "author";
   };
+  proofreaders?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "author";
+  }>;
   subtitle?: string;
   body?: Array<{
     children?: Array<{
@@ -130,6 +148,13 @@ export type Post = {
     crop?: SanityImageCrop;
     _type: "image";
     _key: string;
+  }>;
+  mangas?: Array<{
+    _ref: string;
+    _type: "reference";
+    _weak?: boolean;
+    _key: string;
+    [internalGroqTypeReferenceTo]?: "manga";
   }>;
   podcast?: string;
 };
@@ -239,7 +264,7 @@ export type SanityImageMetadata = {
   isOpaque?: boolean;
 };
 
-export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Post | Tag | Slug | Author | Socials | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
+export type AllSanitySchemaTypes = SanityImagePaletteSwatch | SanityImagePalette | SanityImageDimensions | SanityFileAsset | Geopoint | Manga | Post | Tag | Slug | Author | Socials | SanityImageCrop | SanityImageHotspot | SanityImageAsset | SanityAssetSourceData | SanityImageMetadata;
 export declare const internalGroqTypeReferenceTo: unique symbol;
 // Source: ./src/sanity/queries/posts.ts
 // Variable: POSTS_QUERY

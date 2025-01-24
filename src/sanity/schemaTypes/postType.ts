@@ -70,6 +70,18 @@ export const postType = defineType({
       validation: (Rule) => Rule.required(),
     }),
     defineField({
+      name: "proofreaders",
+      title: "Revisores",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "author" }],
+        },
+      ],
+      fieldset: "_presentation",
+    }),
+    defineField({
       name: "subtitle",
       title: "Subtítulo",
       type: "string",
@@ -90,6 +102,18 @@ export const postType = defineType({
       ],
       fieldset: "_body",
       validation: (Rule) => Rule.required(),
+    }),
+    defineField({
+      name: "mangas",
+      title: "Mangás",
+      type: "array",
+      of: [
+        {
+          type: "reference",
+          to: [{ type: "manga" }],
+        },
+      ],
+      fieldset: "_body",
     }),
     defineField({
       name: "podcast",
