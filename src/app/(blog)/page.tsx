@@ -1,5 +1,5 @@
 // import { AmazonOffersWrapper } from "@/components/Advertising/AmazonOffersWrapper";
-import { RecommendedMangas } from "@/components/Advertising/RecommendedMangas";
+import { RecommendedMangasWrapper } from "@/components/Advertising/Mangas/RecommendedMangasWrapper";
 import { Carousel } from "@/components/Carousel";
 import { PaginationControls } from "@/components/PaginationControls";
 import { PostCard } from "@/components/PostCard";
@@ -8,6 +8,7 @@ import {
   COUNT_POSTS_QUERY,
   FILTER_POSTS_BY_SEARCH_QUERY,
   FILTER_POSTS_BY_TAG_QUERY,
+  GET_ALL_MANGAS_QUERY,
   PAGINATING_POSTS_QUERY,
 } from "@/sanity/queries/posts";
 import { COUNT_POSTS_QUERYResult, POSTS_QUERYResult } from "@/sanity/types";
@@ -69,6 +70,14 @@ const getPostsCount = async () => {
   return data;
 };
 
+const getMangas = async () => {
+  const { data } = await sanityFetch({
+    query: GET_ALL_MANGAS_QUERY,
+  });
+
+  return data;
+};
+
 export default async function Home(props: {
   searchParams?: Promise<{
     page?: string;
@@ -99,6 +108,8 @@ export default async function Home(props: {
     perPage: 3,
     tag: "Podcast",
   });
+
+  const mangas = await getMangas();
 
   return (
     <main className="flex justify-center flex-1">
@@ -146,7 +157,7 @@ export default async function Home(props: {
           </section>
           <section className="flex h-80 lg:h-full lg:w-60">
             {/* <AmazonOffersWrapper term="manga" /> */}
-            <RecommendedMangas />
+            <RecommendedMangasWrapper mangas={mangas} />
           </section>
         </div>
       </div>
