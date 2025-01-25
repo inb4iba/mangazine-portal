@@ -7,8 +7,7 @@ type Props = {
 
 export const RecommendedMangasWrapper = ({ mangas }: Props) => {
   return (
-    <div className="flex flex-col w-full gap-4 items-end">
-      <h4>Mangás recomendados</h4>
+    <div className="flex w-full justify-end">
       <RecommendedMangas mangas={mangas} />
     </div>
   );

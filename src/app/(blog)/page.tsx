@@ -119,32 +119,12 @@ export default async function Home(props: {
           <section
             id="posts-container"
             className="flex flex-col w-full sm:flex-1 gap-5 justify-between">
-            {/* <div>
-              {posts
-                .filter(
-                  (post) =>
-                    !featuredPosts.some((featured) => post._id === featured._id)
-                )
-                .map((post, idx) => (
-                  <PostCard
-                    addSeparator={idx !== 0}
-                    key={post._id}
-                    post={post}
-                  />
-                ))}
-            </div> */}
             <div>
               {posts
-                .filter(() => true)
-                .map((post, idx) => (
-                  <PostCard
-                    addSeparator={idx !== 0}
-                    key={post._id}
-                    post={post}
-                  />
-                ))}
-              {posts
-                .filter(() => true)
+                // .filter(
+                //   (post) =>
+                //     !featuredPosts.some((featured) => post._id === featured._id)
+                // )
                 .map((post, idx) => (
                   <PostCard
                     addSeparator={idx !== 0}
