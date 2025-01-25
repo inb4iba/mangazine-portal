@@ -1,4 +1,5 @@
-import { AmazonOffersWrapper } from "@/components/Advertising/AmazonOffersWrapper";
+// import { AmazonOffersWrapper } from "@/components/Advertising/AmazonOffersWrapper";
+import { RecommendedMangas } from "@/components/Advertising/RecommendedMangas";
 import { Carousel } from "@/components/Carousel";
 import { PaginationControls } from "@/components/PaginationControls";
 import { PostCard } from "@/components/PostCard";
@@ -144,7 +145,8 @@ export default async function Home(props: {
             <PaginationControls pagesCount={totalPages} />
           </section>
           <section className="flex h-80 lg:h-full lg:w-60">
-            <AmazonOffersWrapper term="manga" />
+            {/* <AmazonOffersWrapper term="manga" /> */}
+            <RecommendedMangas />
           </section>
         </div>
       </div>

@@ -9,6 +9,12 @@ export const POSTS_QUERY =
     created_at,
     "slug": slug.current,
     "tag": tag->tag,
+    "mangas": mangas[]-> {
+      _id,
+      title,
+      link,
+      imageUrl
+    },
     author -> {
         _id,
         name,
@@ -25,6 +31,12 @@ export const PAGINATING_POSTS_QUERY =
     created_at,
     "slug": slug.current,
     "tag": tag->tag,
+    "mangas": mangas[]-> {
+      _id,
+      title,
+      link,
+      imageUrl
+    },
     author -> {
         _id,
         name,
@@ -41,6 +53,12 @@ export const FILTER_POSTS_BY_TAG_QUERY =
     created_at,
     "slug": slug.current,
     "tag": tag->tag,
+    "mangas": mangas[]-> {
+      _id,
+      title,
+      link,
+      imageUrl
+    },
     author -> {
         _id,
         name,
@@ -57,6 +75,12 @@ export const FILTER_POSTS_BY_SEARCH_QUERY =
     created_at,
     "slug": slug.current,
     "tag": tag->tag,
+    "mangas": mangas[]-> {
+      _id,
+      title,
+      link,
+      imageUrl
+    },
     author -> {
         _id,
         name,
@@ -74,6 +98,18 @@ export const SINGLE_POST_QUERY =
     body,
     subtitle,
     "tag": tag->tag,
+    "mangas": mangas[]-> {
+      _id,
+      title,
+      link,
+      imageUrl
+    },
+    "proofreaders": proofreaders[]-> {
+      _id,
+      name,
+      avatar,
+      socials
+    },
     author -> {
       _id,
       name,
@@ -84,4 +120,13 @@ export const SINGLE_POST_QUERY =
 
 export const COUNT_POSTS_QUERY = defineQuery(
   `count(*[_type == "post" && !(_id in path('drafts.**'))])`
+);
+
+export const GET_ALL_MANGAS_QUERY = defineQuery(
+  `*[_type == "manga"]{
+    _id,
+    title,
+    imageUrl,
+    link
+  }`
 );
