@@ -135,7 +135,7 @@ export default async function Home(props: {
             </div>
             <PaginationControls pagesCount={totalPages} />
           </section>
-          <section className="flex h-80 lg:h-full lg:w-60">
+          <section className="flex lg:w-60">
             {/* <AmazonOffersWrapper term="manga" /> */}
             <RecommendedMangasWrapper mangas={mangas} />
           </section>
