@@ -47,6 +47,7 @@ export const PostDetails = ({
                       author={proofreader}
                       showSocials={true}
                       imageSize={36}
+                      key={proofreader._id}
                     />
                   );
                 })}

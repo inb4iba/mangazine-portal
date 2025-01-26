@@ -41,7 +41,10 @@ export const RecommendedMangas = ({ mangas }: Props) => {
         <article
           key={manga._id}
           className="flex flex-col w-full hover:brightness-110 transition-all">
-          <Link href={manga.link!} className="flex flex-col gap-1">
+          <Link
+            href={manga.link!}
+            target="_blank"
+            className="flex flex-col gap-1">
             <div className="w-full lg:aspect-[220/320] h-60 relative">
               <Image
                 src={manga.imageUrl!}

@@ -8,6 +8,8 @@ import { SINGLE_POST_QUERY } from "@/sanity/queries/posts";
 import { SINGLE_POST_QUERYResult } from "@/sanity/types";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 import { PortableText } from "next-sanity";
+import Image from "next/image";
+import Link from "next/link";
 
 type PostProps = {
   params: Promise<{ slug: string }>;
@@ -49,6 +51,31 @@ const Post = async ({ params }: PostProps) => {
                 />
               )}
             </article>
+            <div className="flex w-full h-fit p-5 gap-5 rounded-lg bg-white/70">
+              {post.mangas &&
+                post.mangas.map((manga) => (
+                  <article
+                    key={manga._id}
+                    className="flex flex-col w-full hover:brightness-110 transition-all">
+                    <Link
+                      href={manga.link!}
+                      className="flex flex-col gap-1"
+                      target="_blank">
+                      <div className="w-full aspect-[3/4] lg:aspect-square relative">
+                        <Image
+                          src={manga.imageUrl!}
+                          alt="manga cover"
+                          fill
+                          className="object-cover"
+                        />
+                      </div>
+                      <h4 className="text-sm font-medium text-center">
+                        {manga.title}
+                      </h4>
+                    </Link>
+                  </article>
+                ))}
+            </div>
           </section>
           <PostDetails
             author={post.author}
