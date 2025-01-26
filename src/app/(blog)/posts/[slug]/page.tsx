@@ -52,6 +52,7 @@ const Post = async ({ params }: PostProps) => {
           </section>
           <PostDetails
             author={post.author}
+            proofreaders={post.proofreaders}
             body={post.body}
             created_at={post.created_at || ""}
             tag={post.tag}

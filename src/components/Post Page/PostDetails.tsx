@@ -9,11 +9,18 @@ import Link from "next/link";
 type Props = {
   body: NonNullable<SINGLE_POST_QUERYResult>["body"];
   author: NonNullable<SINGLE_POST_QUERYResult>["author"];
+  proofreaders?: NonNullable<SINGLE_POST_QUERYResult>["proofreaders"];
   created_at: string;
   tag: string | null;
 };
 
-export const PostDetails = ({ author, body, created_at, tag }: Props) => {
+export const PostDetails = ({
+  author,
+  body,
+  created_at,
+  tag,
+  proofreaders,
+}: Props) => {
   return (
     <aside className="relative top-0 flex w-full flex-col sm:sticky sm:w-96 h-fit">
       <div className="flex sm:flex-col justify-between">
@@ -23,8 +30,30 @@ export const PostDetails = ({ author, body, created_at, tag }: Props) => {
           <span className="hidden font-medium sm:inline-block">
             Escrito por
           </span>
-          <AuthorNameplate author={author} showSocials={true} />
+          <AuthorNameplate author={author} showSocials={true} imageSize={36} />
         </div>
+        {proofreaders && (
+          <>
+            <Separator className="hidden sm:block" />
+            <div className="flex flex-col gap-2 px-6 py-4 sm:w-full">
+              <span className="hidden font-medium sm:inline-block">
+                Revisado por
+              </span>
+              <div className="flex flex-col gap-4">
+                {proofreaders.map((proofreader) => {
+                  if (!proofreader) return;
+                  return (
+                    <AuthorNameplate
+                      author={proofreader}
+                      showSocials={true}
+                      imageSize={36}
+                    />
+                  );
+                })}
+              </div>
+            </div>
+          </>
+        )}
         <Separator className="hidden sm:block" />
         <div className="flex gap-1 flex-col sm:w-full">
           <div className="px-6 pt-4 flex flex-col">

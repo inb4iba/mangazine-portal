@@ -18,22 +18,24 @@ type AuthorNameplateProps = {
     | NonNullable<SINGLE_POST_QUERYResult>["author"]
     | NonNullable<POSTS_QUERYResult[number]>["author"];
   showSocials?: boolean;
+  imageSize?: number;
 };
 
 export const AuthorNameplate = ({
   author,
   showSocials,
+  imageSize = 24,
 }: AuthorNameplateProps) => {
   if (!author) throw new Error("Post sem autor");
 
   return (
-    <>
+    <div className="flex flex-col gap-1">
       <div className="flex relative items-center gap-2">
         <Image
           src={urlFor(author.avatar as SanityImageSource).url()}
           alt={`${author.name} avatar`}
-          width={24}
-          height={24}
+          width={imageSize}
+          height={imageSize}
           className="rounded-full"
         />
         <span className="font-medium">{author.name}</span>
@@ -147,6 +149,6 @@ export const AuthorNameplate = ({
           )}
         </div>
       )}
-    </>
+    </div>
   );
 };
