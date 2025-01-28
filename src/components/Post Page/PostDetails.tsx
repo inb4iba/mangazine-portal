@@ -36,10 +36,8 @@ export const PostDetails = ({
         {proofreaders && (
           <>
             <Separator className="hidden sm:block" />
-            <div className="flex flex-col gap-2 px-6 py-4 sm:w-full">
-              <span className="hidden font-medium sm:inline-block">
-                Revisado por
-              </span>
+            <div className="hidden sm:flex flex-col gap-2 px-6 py-4 sm:w-full">
+              <span className="font-medium">Revisado por</span>
               <div className="flex flex-col gap-4">
                 {proofreaders.map((proofreader) => {
                   if (!proofreader) return;
