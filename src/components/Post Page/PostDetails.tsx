@@ -5,6 +5,7 @@ import { formatDate } from "@/utils/formatDate";
 import { SINGLE_POST_QUERYResult } from "@/sanity/types";
 import { Separator } from "../Separator";
 import Link from "next/link";
+import { ShareBtn } from "../Share/ShareBtn";
 
 type Props = {
   body: NonNullable<SINGLE_POST_QUERYResult>["body"];
@@ -22,7 +23,7 @@ export const PostDetails = ({
   proofreaders,
 }: Props) => {
   return (
-    <aside className="relative top-0 flex w-full flex-col sm:sticky sm:w-96 h-fit">
+    <aside className="relative top-0 flex w-full flex-col sm:flex-col-reverse sm:sticky sm:w-96 h-fit sm:py-4">
       <div className="flex sm:flex-col justify-between">
         <PostSummary chapters={filterChaptersFromBody(body)} />
         <Separator className="hidden sm:block" />
@@ -78,6 +79,9 @@ export const PostDetails = ({
             </>
           )}
         </div>
+      </div>
+      <div className="flex px-6 w-full">
+        <ShareBtn />
       </div>
     </aside>
   );
