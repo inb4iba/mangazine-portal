@@ -2,7 +2,7 @@
 
 import { subscribe, unsubscribe } from "@/utils/events";
 import { useEffect, useState } from "react";
-import { Share } from "../Share/ShareComponent";
+import { ShareComponent } from "../Share/ShareComponent";
 
 type ChildrenComponents = "SHARE";
 
@@ -33,7 +33,7 @@ export const Modal = () => {
         <div
           className="fixed h-screen w-screen top-0 left-0 bg-black/50 z-[100] flex justify-center items-center"
           onClick={() => setModalActive(false)}>
-          <Share />
+          <ShareComponent />
         </div>
       )}
     </>
