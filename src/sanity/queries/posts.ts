@@ -93,6 +93,7 @@ export const SINGLE_POST_QUERY =
     _id,
     cover,
     title,
+    description,
     podcast,
     created_at,
     body,

@@ -7,12 +7,41 @@ import { sanityFetch } from "@/sanity/lib/live";
 import { SINGLE_POST_QUERY } from "@/sanity/queries/posts";
 import { SINGLE_POST_QUERYResult } from "@/sanity/types";
 import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import { Metadata } from "next";
 import { PortableText } from "next-sanity";
 import Image from "next/image";
 import Link from "next/link";
 
 type PostProps = {
   params: Promise<{ slug: string }>;
+};
+
+export const generateMetadata = async ({
+  params,
+}: PostProps): Promise<Metadata | null> => {
+  const { slug } = await params;
+
+  const post = await getData(slug);
+
+  if (!post) return null;
+
+  return {
+    title: post.title,
+    description: post.description,
+    openGraph: {
+      title: post.title!,
+      description: post.description!,
+      locale: "pt-br",
+      type: "website",
+      url: `https://mangazine.com.br/posts/${slug}`,
+      siteName: "Mangazine",
+      images: [
+        {
+          url: urlFor(post.cover!).url(),
+        },
+      ],
+    },
+  };
 };
 
 const getData = async (slug: string) => {

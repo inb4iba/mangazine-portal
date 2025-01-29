@@ -6,7 +6,10 @@ import { poppins } from "../fonts";
 import { Modal } from "@/components/UI/Modal";
 
 export const metadata: Metadata = {
-  title: "Mangazine",
+  title: {
+    default: "Mangazine",
+    template: "%s - Mangazine",
+  },
   description: "Portal contendo textos e podcasts de otaku para otaku.",
 };
 

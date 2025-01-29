@@ -310,7 +310,7 @@ export type POSTS_QUERYResult = Array<{
   } | null;
 }>;
 // Variable: SINGLE_POST_QUERY
-// Query: *[_type == "post" && slug.current == $slug]{    _id,    cover,    title,    podcast,    created_at,    body,    subtitle,    "tag": tag->tag,    "mangas": mangas[]-> {      _id,      title,      link,      imageUrl    },    "proofreaders": proofreaders[]-> {      _id,      name,      avatar,      socials    },    author -> {      _id,      name,      avatar,      socials    }  }[0]
+// Query: *[_type == "post" && slug.current == $slug]{    _id,    cover,    title,    description,    podcast,    created_at,    body,    subtitle,    "tag": tag->tag,    "mangas": mangas[]-> {      _id,      title,      link,      imageUrl    },    "proofreaders": proofreaders[]-> {      _id,      name,      avatar,      socials    },    author -> {      _id,      name,      avatar,      socials    }  }[0]
 export type SINGLE_POST_QUERYResult = {
   _id: string;
   cover: {
@@ -325,6 +325,7 @@ export type SINGLE_POST_QUERYResult = {
     _type: "image";
   } | null;
   title: string | null;
+  description: string | null;
   podcast: string | null;
   created_at: string | null;
   body: Array<{
@@ -414,7 +415,7 @@ import "@sanity/client";
 declare module "@sanity/client" {
   interface SanityQueries {
     "*[_type == \"post\"] | order(created_at desc)[0..$perPage]{\n    _id,\n    title,\n    description,\n    cover,\n    created_at,\n    \"slug\": slug.current,\n    \"tag\": tag->tag,\n    \"mangas\": mangas[]-> {\n      _id,\n      title,\n      link,\n      imageUrl\n    },\n    author -> {\n        _id,\n        name,\n        avatar\n    }\n}": POSTS_QUERYResult;
-    "*[_type == \"post\" && slug.current == $slug]{\n    _id,\n    cover,\n    title,\n    podcast,\n    created_at,\n    body,\n    subtitle,\n    \"tag\": tag->tag,\n    \"mangas\": mangas[]-> {\n      _id,\n      title,\n      link,\n      imageUrl\n    },\n    \"proofreaders\": proofreaders[]-> {\n      _id,\n      name,\n      avatar,\n      socials\n    },\n    author -> {\n      _id,\n      name,\n      avatar,\n      socials\n    }\n  }[0]": SINGLE_POST_QUERYResult;
+    "*[_type == \"post\" && slug.current == $slug]{\n    _id,\n    cover,\n    title,\n    description,\n    podcast,\n    created_at,\n    body,\n    subtitle,\n    \"tag\": tag->tag,\n    \"mangas\": mangas[]-> {\n      _id,\n      title,\n      link,\n      imageUrl\n    },\n    \"proofreaders\": proofreaders[]-> {\n      _id,\n      name,\n      avatar,\n      socials\n    },\n    author -> {\n      _id,\n      name,\n      avatar,\n      socials\n    }\n  }[0]": SINGLE_POST_QUERYResult;
     "count(*[_type == \"post\" && !(_id in path('drafts.**'))])": COUNT_POSTS_QUERYResult;
     "*[_type == \"manga\"]{\n    _id,\n    title,\n    imageUrl,\n    link\n  }": GET_ALL_MANGAS_QUERYResult;
   }
