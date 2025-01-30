@@ -106,7 +106,6 @@ export default async function Home(props: {
 
   const featuredPosts: POSTS_QUERYResult = await getPosts({
     perPage: 3,
-    tag: "Podcast",
   });
 
   const mangas = await getMangas();
@@ -121,10 +120,10 @@ export default async function Home(props: {
             className="flex flex-col w-full sm:flex-1 gap-5 justify-between">
             <div>
               {posts
-                // .filter(
-                //   (post) =>
-                //     !featuredPosts.some((featured) => post._id === featured._id)
-                // )
+                .filter(
+                  (post) =>
+                    !featuredPosts.some((featured) => post._id === featured._id)
+                )
                 .map((post, idx) => (
                   <PostCard
                     addSeparator={idx !== 0}
