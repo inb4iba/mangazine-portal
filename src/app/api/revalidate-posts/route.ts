@@ -1,39 +1,53 @@
-import { isValidSignature, SIGNATURE_HEADER_NAME } from "@sanity/webhook";
-import type { NextApiRequest, NextApiResponse } from "next";
+import { NextRequest } from "next/server";
+import { headers } from "next/headers";
+import { revalidatePath } from "next/cache";
 
-const secret = process.env.REVALIDATE_TOKEN;
+const token = process.env.REVALIDATE_TOKEN;
 
-type bodyResponse = {
-  slug: string;
-};
+export async function POST(req: NextRequest) {
+  const headersList = await headers();
+  const receivedToken = headersList.get("REVALIDATE");
 
-export async function POST(req: NextApiRequest, res: NextApiResponse) {
-  const signature = req.headers[SIGNATURE_HEADER_NAME];
-  const body = await readBody(req);
-  if (!(await isValidSignature(body, signature as string, secret!))) {
-    res.status(401).json({ success: false, message: "Invalid signature" });
-    return;
-  }
+  if (receivedToken !== token)
+    return new Response("Invalid signature!", {
+      status: 401,
+    });
 
-  const jsonBody: bodyResponse = JSON.parse(body);
-  await res.revalidate("/");
-  await res.revalidate(`/posts/${jsonBody.slug}`);
-  res.json({ success: true });
+  const { slug } = await req.json();
+
+  revalidatePath("/");
+  revalidatePath(`/posts/${slug}`);
 }
 
-export const config = {
-  api: {
-    bodyParser: false,
-  },
-};
+// export async function POST(req: NextRequest) {
+//   //   const signature = req.headers[SIGNATURE_HEADER_NAME];
+//   const signature = req.headers.get("SIGNATURE_HEADER_NAME");
+//   const body = await readBody(req);
+//   if (!(await isValidSignature(body, signature as string, secret!))) {
+//     res.status(401).json({ success: false, message: "Invalid signature" });
+//     return;
+//   }
 
-async function readBody(readable: NextApiRequest) {
-  const chunks = [];
-  for await (const chunk of readable) {
-    chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
-  }
-  return Buffer.concat(chunks).toString("utf8");
-}
+//   const jsonBody: bodyResponse = JSON.parse(body);
+
+//   await res.revalidate("/");
+//   await res.revalidate(`/posts/${jsonBody.slug}`);
+//   res.json({ success: true });
+// }
+
+// export const config = {
+//   api: {
+//     bodyParser: false,
+//   },
+// };
+
+// async function readBody(readable: NextRequest) {
+//   const chunks = [];
+//   for await (const chunk of readable) {
+//     chunks.push(typeof chunk === "string" ? Buffer.from(chunk) : chunk);
+//   }
+//   return Buffer.concat(chunks).toString("utf8");
+// }
 
 //   try {
 //     // This should be the actual path not a rewritten path
