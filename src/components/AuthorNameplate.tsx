@@ -71,7 +71,7 @@ export const AuthorNameplate = ({
           )}
           {author.socials?.bluesky && (
             <Link
-              href={`https://bsky.app/user/${author.socials.bluesky}`}
+              href={`https://bsky.app/profile/${author.socials.bluesky}`}
               target="_blank">
               <Image
                 src={bluesky}
