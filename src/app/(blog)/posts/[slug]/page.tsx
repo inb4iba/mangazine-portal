@@ -80,9 +80,9 @@ const Post = async ({ params }: PostProps) => {
                 />
               )}
             </article>
-            <div className="flex w-full h-fit p-5 gap-5 rounded-lg bg-white/70">
-              {post.mangas &&
-                post.mangas.map((manga) => (
+            {post.mangas && (
+              <div className="flex w-full h-fit p-5 gap-5 rounded-lg bg-white/70">
+                {post.mangas.map((manga) => (
                   <article
                     key={manga._id}
                     className="flex flex-col w-full hover:brightness-110 transition-all">
@@ -104,7 +104,8 @@ const Post = async ({ params }: PostProps) => {
                     </Link>
                   </article>
                 ))}
-            </div>
+              </div>
+            )}
           </section>
           <PostDetails
             author={post.author}
