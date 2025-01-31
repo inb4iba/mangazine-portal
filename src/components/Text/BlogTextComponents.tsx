@@ -3,8 +3,21 @@ import { PortableTextReactComponents } from "next-sanity";
 import { ReactNode } from "react";
 
 const retrieveTextFromNode = (node: ReactNode) => {
-  const firstChild = Array.isArray(node) ? node[0] : node;
-  return typeof firstChild === "string" ? generateSlug(firstChild) : "";
+  if (!Array.isArray(node)) {
+    return "";
+  }
+
+  const title = node
+    .map((child) =>
+      typeof child === "string"
+        ? child
+        : typeof child === "object" && Object.hasOwn(child.props, "text")
+          ? child.props["text"]
+          : ""
+    )
+    .join("");
+
+  return title;
 };
 
 export const BlockTextComponents = (): Partial<PortableTextReactComponents> => {
